@@ -833,6 +833,16 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
 @keyframes platepop { 0% { opacity: 0; transform: scale(.8) translateY(18px) } 12% { opacity: 1; transform: scale(1.06) } 20% { transform: scale(1) } 84% { opacity: 1; transform: scale(1) } 100% { opacity: 0; transform: scale(1.04) translateY(-8px) } }
 @media (orientation: portrait) { #curtain .plate { top: 44vh; } }
 
+/* mandatory boss popup */
+.bpsheet { max-width: 420px !important; padding: 20px 20px 16px !important; text-align: center; display: grid; gap: 8px; justify-items: center; overflow: visible !important; border-color: #5b2a8a; }
+.bpsheet img { width: 96px; height: 96px; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,.35)); }
+.bpsheet .k { font: 800 11px var(--sans); letter-spacing: .22em; text-transform: uppercase; color: #7a3fb0; }
+.bpsheet h3 { margin: 0; font: italic 900 clamp(26px, 8vw, 34px)/1.05 var(--serif); }
+.bpsheet p { margin: 0; font: italic 600 18px/1.3 var(--serif); color: var(--sepia); }
+.bpsheet .bpbtns { display: grid; gap: 10px; width: 100%; margin-top: 6px; }
+.bpsheet small { font: 600 12px var(--sans); color: var(--sepia); }
+#bossPrompt { background: rgba(26, 10, 46, .72); }
+
 </style>
 
 <canvas id="world" role="img" aria-label="An illustrated mountain in an expedition journal. Your climber ascends as your score grows."></canvas>
@@ -1075,6 +1085,17 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
     <h3 id="exitT" style="margin:0 0 6px;font:italic 900 26px var(--serif)">Leave this climb?</h3>
     <p id="exitP" style="margin:0 0 14px;font-size:15px;line-height:1.45;color:var(--sepia)"></p>
     <div style="display:grid;gap:10px"><button id="exitStay" class="btn gold" type="button">Keep climbing</button><button id="exitGo" class="btn ghost" type="button">Exit to menu</button></div>
+  </div>
+</div>
+
+<div id="bossPrompt" class="scrim" hidden>
+  <div class="sheet card taped bpsheet" role="alertdialog" aria-modal="true" aria-labelledby="bpT" aria-describedby="bpP">
+    <img id="bpRowan" alt="" width="96" height="96">
+    <div class="k">Boss fight unlocked</div>
+    <h3 id="bpT">You've entered the boss fight!</h3>
+    <p id="bpP">The Storm Wraith wants a fight. Want to fight?</p>
+    <div class="bpbtns"><button id="bpFight" class="btn red" type="button">⚡ Fight the Storm Wraith</button><button id="bpLater" class="btn ghost" type="button">Not now</button></div>
+    <small>You can fight later today from the ⚡ Storm Wraith button.</small>
   </div>
 </div>
 
@@ -7422,6 +7443,7 @@ function showFinal() {
   const total = S.total, rk = rankFor(total), prev = loadBest(), isNew = !prev || total > prev.score, mode = S.mode, daily = mode.kind === 'daily';
   if (isNew && !S.preview) saveBest(total);
   vignette('', 0); Sfx.wind(false);
+  if (!S.preview && total >= SOVEREIGN_MIN && !loadGiant()) setTimeout(bossPrompt, 2300);
   const grades = S.rounds.map(gradeOf), tiles = S.rounds.map(function (r) { return r.answers.length ? r.answers.map(function (a) { return TILE_EMOJI[a.tier]; }).join('') : '⬜'; }).join(' | ');
   const head = 'Summit 🧗 ' + (daily ? 'Daily #' + (mode.day + 1) : mode.name) + ' · ' + dateLabel(new Date()) + ' · ' + fmt(total) + ' ft · ' + RANK_EMOJI[RANKS.indexOf(rk)] + ' ' + rk.name;
   let streakN = 0;
@@ -7945,6 +7967,14 @@ function giantCleanup() {
   Sfx.wind(false); Sfx.bossMusic(false); vignette('', 0); $('pop').hidden = true;
 }
 function giantHome() { giantCleanup(); showIntro(); }
+function bossPrompt() {
+  if ($('final').hidden || !$('bossPrompt').hidden || loadGiant()) return;
+  try { $('bpRowan').src = RW.struck.src; } catch (e) { /* ignore */ }
+  try { Sfx.rumble(true); } catch (e) { /* ignore */ }
+  $('bossPrompt').hidden = false; try { $('bpFight').focus({ preventScroll: true }); } catch (e) { /* ignore */ }
+}
+$('bpFight').addEventListener('click', function () { $('bossPrompt').hidden = true; openGiant(false); });
+$('bpLater').addEventListener('click', function () { Sfx.click(); $('bossPrompt').hidden = true; });
 function openGiant(force) { // entry from the start screen, the ranks sheet, the final screen or the preview panel
   Sfx.unlock(); Sfx.click();
   const done = force ? null : loadGiant();
