@@ -811,6 +811,19 @@
 .howsheet { padding: 30px 22px 18px !important; box-sizing: border-box; }
 .howsheet .rules4 i { display: block !important; }
 html.wide .howsheet .rules4 li { padding: 9px 10px; }
+/* let the corner tape stick out over the paper edge like the menu card */
+.sheet.howsheet { overflow: visible !important; }
+@media (max-height: 620px) { .sheet.howsheet { overflow: auto !important; } }
+@media (max-height: 760px) {
+  .sheet.howsheet { max-height: none !important; padding: 26px 20px 12px !important; gap: 8px; }
+  .howsheet .rules4 { gap: 6px; }
+  .howsheet .rules4 li { padding: 7px 10px; }
+  .howsheet .rules4 .n { width: 32px; height: 32px; font-size: 17px; }
+  .howsheet .rules4 li { grid-template-columns: 34px 1fr; }
+  .howsheet .rules4 b { font-size: 15.5px; }
+  .howsheet .rules4 i { font-size: 12.5px; }
+  .howsheet h3 { font-size: 26px; }
+}
 
 </style>
 
