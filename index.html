@@ -5104,7 +5104,7 @@ function permFor(c) {
   return PERMS[c];
 }
 // hand-picked days: day number -> prompt ids in round order (today is a warm-up, very easy)
-const PICKED_DAYS = { 0: ['fruit', 'pizza', 'ballsport', 'shape', 'schoolSubject', 'headPart', 'holiday'], 1: ['iceCream', 'videoGame', 'nflTeam', 'instrument', 'superhero', 'usState', 'coffeeDrink'] };
+const PICKED_DAYS = { 0: ['fruit', 'pizza', 'ballsport', 'shape', 'schoolSubject', 'headPart', 'holiday'], 1: ['late', 'tvShow', 'athlete', 'landmark', 'cheese', 'carBrand', 'dinosaur'] };
 function dailySequence(dn) {
   const n = Math.max(0, dn | 0), c = Math.floor(n / CYCLE), d = n % CYCLE;
   if (PICKED_DAYS[n]) { const ids = PICKED_DAYS[n], out = ids.map(function (id) { return ALL.filter(function (p) { return p.id === id; })[0]; }); if (out.every(Boolean)) return out; }
@@ -7152,7 +7152,7 @@ function loadBest() { try { const v = JSON.parse(localStorage.getItem('summit-be
 function saveBest(score) { try { localStorage.setItem('summit-best', JSON.stringify({ score: score })); } catch (e) { /* ignore */ } }
 function jget(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
 function jset(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* ignore */ } }
-const DAILY_REV = 6; // bump to reshuffle the schedule and let today be played again
+const DAILY_REV = 7; // bump to reshuffle the schedule and let today be played again
 function loadDaily() { const v = jget('summit-daily'); return v && v.day === dayNumber() && v.rev === DAILY_REV && typeof v.score === 'number' ? v : null; }
 function currentStreak() { const s = jget('summit-streak'); if (!s) return { n: 0, today: false }; const d = dayNumber(); return s.last === d ? { n: s.n, today: true } : s.last === d - 1 ? { n: s.n, today: false } : { n: 0, today: false }; }
 function bumpStreak(day) { const s = jget('summit-streak') || { last: -99, n: 0 }; if (s.last === day) return s.n; const n = s.last === day - 1 ? s.n + 1 : 1; jset('summit-streak', { last: day, n: n }); return n; }
