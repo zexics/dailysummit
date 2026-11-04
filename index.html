@@ -804,6 +804,14 @@
     #final .card { padding-top: 8px; padding-bottom: 8px; }
   }
 
+/* rules sheet: exit button + full menu width */
+.howsheet { position: relative; }
+.howsheet .howx { position: absolute; top: 10px; right: 10px; z-index: 2; }
+.howsheet #howBack { justify-self: center; font: 700 14px var(--sans); padding: 4px 10px; color: var(--sepia); }
+.howsheet { padding: 30px 22px 18px !important; box-sizing: border-box; }
+.howsheet .rules4 i { display: block !important; }
+html.wide .howsheet .rules4 li { padding: 9px 10px; }
+
 </style>
 
 <canvas id="world" role="img" aria-label="An illustrated mountain in an expedition journal. Your climber ascends as your score grows."></canvas>
@@ -1026,7 +1034,8 @@
 </div>
 
 <div id="howSheet" class="scrim" hidden>
-  <div class="sheet card taped howsheet" role="dialog" aria-modal="true" aria-labelledby="howT" style="max-width:440px">
+  <div class="sheet card taped howsheet" role="dialog" aria-modal="true" aria-labelledby="howT" style="max-width:620px">
+    <button id="howX" class="xbtn howx" type="button" aria-label="Back to menu">✕</button>
     <div><div class="k">Before you climb</div><h3 id="howT">How to play</h3></div>
     <ol class="rules4">
       <li><span class="n">1</span><div><b>Rarer answers = more feet.</b><i>Common 15 · Uncommon 30 · Rare 60 · Unicorn 120</i></div></li>
@@ -1036,6 +1045,7 @@
     </ol>
     <div class="rmeta">7 rounds · 25 seconds each · final round pays double</div>
     <button id="howGo" class="btn red" type="button">Got it, start climbing</button>
+    <button id="howBack" class="linkbtn" type="button">Back to menu</button>
   </div>
 </div>
 
@@ -6456,6 +6466,11 @@ function seenHow() { try { return !!localStorage.getItem('summit-howto'); } catc
 function openHow(go) { howGo = go || null; $('howGo').textContent = go ? 'Got it, start climbing' : 'Got it'; $('howSheet').hidden = false; try { $('howGo').focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
 function closeHow() { if ($('howSheet').hidden) return; $('howSheet').hidden = true; try { localStorage.setItem('summit-howto', '1'); } catch (e) { /* ignore */ } const g = howGo; howGo = null; if (g) g(); }
 $('howGo').addEventListener('click', function () { Sfx.unlock(); Sfx.click(); closeHow(); });
+function exitHow() { if ($('howSheet').hidden) return; Sfx.click(); $('howSheet').hidden = true; howGo = null; }
+$('howX').addEventListener('click', exitHow);
+$('howBack').addEventListener('click', exitHow);
+$('howSheet').addEventListener('click', function (e) { if (e.target === this) exitHow(); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('howSheet').hidden) { e.preventDefault(); exitHow(); } });
 $('howBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click(); openHow(null); });
 function startGame(mode) {
   Sfx.unlock();
