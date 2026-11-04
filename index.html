@@ -843,6 +843,33 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
 .bpsheet small { font: 600 12px var(--sans); color: var(--sepia); }
 #bossPrompt { background: rgba(26, 10, 46, .72); }
 
+/* results sheet on the start page */
+.sheet.ressheet { position: relative; max-width: 560px; overflow: visible !important; padding: 28px 18px 16px !important; display: grid; gap: 10px; max-height: calc(92dvh / var(--z, 1)); grid-template-rows: auto auto auto minmax(0, 1fr) auto; }
+.ressheet .howx { position: absolute; top: 10px; right: 10px; z-index: 2; }
+.ressheet .k { text-align: center; font: 800 11px var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--red); }
+.ressheet h3 { margin: 0; text-align: center; font: italic 900 clamp(26px, 8vw, 32px)/1.05 var(--serif); }
+.resbig { display: flex; justify-content: center; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.resbig b { font: italic 900 clamp(38px, 11vw, 52px)/1 var(--serif); }
+.resbig small { font: 800 13px var(--sans); letter-spacing: .14em; color: var(--sepia); }
+.resbig span { margin-left: 8px; padding: 3px 10px; border-radius: 999px; font: 800 12px var(--sans); letter-spacing: .12em; text-transform: uppercase; background: var(--rk, #a0612a); color: #fffaf0; }
+.resrows { overflow: auto; display: grid; gap: 6px; align-content: start; padding: 2px; border-radius: 6px; }
+.resrow { background: #FFFAF0; border: 1.5px solid var(--ink); border-radius: 6px 9px 6px 9px; padding: 7px 10px; }
+.resrow.bust { background: #f6d9d4; border-color: var(--red); }
+.resrow .rh2 { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; font: 700 13px var(--sans); }
+.resrow .rp { font: 900 15px var(--sans); }
+.resrow .ra { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 3px; font: 600 12.5px var(--sans); color: var(--sepia); }
+.resbtns { display: grid; gap: 4px; justify-items: center; }
+.resbtns .btn { width: 100%; }
+/* boss sneak peek: three forms with arrows */
+.bpforms { display: flex; align-items: center; justify-content: center; gap: 2px; width: 100%; margin: 2px 0 4px; }
+.bpforms figure { margin: 0; flex: 1 1 0; min-width: 0; display: grid; justify-items: center; gap: 3px; }
+.bpforms img { width: 100%; height: 96px; object-fit: contain; filter: drop-shadow(0 4px 5px rgba(20, 8, 40, .45)); }
+.bpforms figure:nth-of-type(1) img { height: 80px; }
+.bpforms figure:nth-of-type(3) img { height: 104px; }
+.bpforms figcaption { font: 800 12px/1.15 var(--sans); color: var(--ink); text-align: center; }
+.bpforms figcaption i { display: block; font: 800 9.5px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: #7a3fb0; font-style: normal; margin-bottom: 1px; }
+.bpforms .bparrow { flex: none; font-size: 22px; color: #b8372b; text-shadow: 0 2px 0 rgba(43, 34, 24, .25); }
+
 </style>
 
 <canvas id="world" role="img" aria-label="An illustrated mountain in an expedition journal. Your climber ascends as your score grows."></canvas>
@@ -896,6 +923,7 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
       <div class="dsc"><span id="doneScore">0</span><small>FT</small></div>
       <div id="donePips" class="pips mini" aria-label="Round results"></div>
       <div class="nx">Next climb in <b id="nextIn">--:--:--</b></div>
+      <button id="doneView" class="btn gold" type="button" style="margin-bottom:8px">See your results</button>
       <div class="dacts"><button id="doneCopy" class="btn ghost sm2" type="button">Copy result</button><button id="doneNotes" class="btn ghost sm2" type="button" hidden>Field notes</button></div>
     </div>
     <button id="giantBtn" class="btn gold" type="button" hidden>⚡ Storm Wraith · daily boss</button>
@@ -1090,12 +1118,29 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
 
 <div id="bossPrompt" class="scrim" hidden>
   <div class="sheet card taped bpsheet" role="alertdialog" aria-modal="true" aria-labelledby="bpT" aria-describedby="bpP">
-    <img id="bpRowan" alt="" width="96" height="96">
+    <div class="bpforms" aria-label="The Storm Wraith's three forms">
+      <figure><img id="bpF1" alt="Gloomwisp"><figcaption><i>Phase 1</i>Gloomwisp</figcaption></figure>
+      <span class="bparrow" aria-hidden="true">➜</span>
+      <figure><img id="bpF2" alt="Storm Wraith"><figcaption><i>Phase 2</i>Storm Wraith</figcaption></figure>
+      <span class="bparrow" aria-hidden="true">➜</span>
+      <figure><img id="bpF3" alt="Tempest Reaver"><figcaption><i>Phase 3</i>Tempest Reaver</figcaption></figure>
+    </div>
     <div class="k">Boss fight unlocked</div>
     <h3 id="bpT">You've entered the boss fight!</h3>
     <p id="bpP">The Storm Wraith wants a fight. Want to fight?</p>
     <div class="bpbtns"><button id="bpFight" class="btn red" type="button">⚡ Fight the Storm Wraith</button><button id="bpLater" class="btn ghost" type="button">Not now</button></div>
     <small>You can fight later today from the ⚡ Storm Wraith button.</small>
+  </div>
+</div>
+
+<div id="resSheet" class="scrim" hidden>
+  <div class="sheet card taped ressheet" role="dialog" aria-modal="true" aria-labelledby="resT">
+    <button id="resX" class="xbtn howx" type="button" aria-label="Close">✕</button>
+    <div class="k" id="resKick">Today's climb</div>
+    <h3 id="resT">Your results</h3>
+    <div class="resbig"><b id="resScore">0</b><small>ft</small><span id="resRank"></span></div>
+    <div id="resRows" class="resrows"></div>
+    <div class="resbtns"><button id="resCopy" class="btn red" type="button">Copy result</button><button id="resBack" class="linkbtn" type="button">Back to menu</button></div>
   </div>
 </div>
 
@@ -7447,7 +7492,7 @@ function showFinal() {
   const grades = S.rounds.map(gradeOf), tiles = S.rounds.map(function (r) { return r.answers.length ? r.answers.map(function (a) { return TILE_EMOJI[a.tier]; }).join('') : '⬜'; }).join(' | ');
   const head = 'Summit 🧗 ' + (daily ? 'Daily #' + (mode.day + 1) : mode.name) + ' · ' + dateLabel(new Date()) + ' · ' + fmt(total) + ' ft · ' + RANK_EMOJI[RANKS.indexOf(rk)] + ' ' + rk.name;
   let streakN = 0;
-  if (daily) { streakN = bumpStreak(mode.day); jset('summit-daily', { day: mode.day, rev: DAILY_REV, score: total, rank: rk.name, grades: grades, share: head + (streakN > 1 ? ' · 🔥' + streakN : '') + '\n' + tiles }); }
+  if (daily) { streakN = bumpStreak(mode.day); jset('summit-daily', { day: mode.day, rev: DAILY_REV, score: total, rank: rk.name, grades: grades, rounds: S.rounds.map(function (r) { return { s: r.p.short, pts: r.points, bust: !!r.bust, lost: r.lost || 0, fin: !!r.final, a: r.answers.map(function (a) { return [a.name, a.tier, a.mult, a.pts]; }) }; }), share: head + (streakN > 1 ? ' · 🔥' + streakN : '') + '\n' + tiles }); }
   else if (!S.preview) saveRouteBest(mode.key, total);
   $('finalKick').textContent = (daily ? 'Daily #' + (mode.day + 1) + (streakN > 1 ? ' · 🔥 ' + streakN + '-day streak' : '') : mode.name) + (prev && isNew ? ' · new personal best!' : '');
   $('nextRoute').textContent = daily ? 'Play unlimited' : 'Choose another route';
@@ -7670,6 +7715,30 @@ $('startBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click();
 $('unlimBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click(); openPick(); });
 $('pickBack').addEventListener('click', function () { Sfx.click(); showIntro(); });
 $('homeBtn').addEventListener('click', function () { Sfx.click(); showIntro(); });
+function openResults() {
+  const d = loadDaily(); if (!d) return;
+  $('resKick').textContent = 'Daily #' + (dayNumber() + 1) + ' · ' + dateLabel(new Date());
+  $('resScore').textContent = fmt(d.score); $('resRank').textContent = d.rank; $('resRank').style.setProperty('--rk', RANK_COL[d.rank] || '#a0612a');
+  const box = $('resRows'); box.innerHTML = '';
+  (d.rounds || []).forEach(function (r, i) {
+    const row = el('div', 'resrow' + (r.bust ? ' bust' : ''));
+    const head = el('div', 'rh2'); head.appendChild(el('span', 'rn', (r.fin ? 'Final Push' : 'Round ' + (i + 1)) + ' · ' + r.s));
+    head.appendChild(el('b', 'rp', r.bust ? (r.lost > 0 ? '−' + fmt(r.lost) : '0') : '+' + fmt(r.pts))); row.appendChild(head);
+    const ans = el('div', 'ra');
+    r.a.forEach(function (a) { ans.appendChild(el('span', 'ch t' + a[1], (a[1] ? TILE_EMOJI[a[1]] : '🟥') + ' ' + a[0] + (a[1] ? ' ×' + a[2] : ' (rockfall)'))); });
+    if (!r.a.length) ans.appendChild(el('span', 'ch', 'No answer'));
+    row.appendChild(ans); box.appendChild(row);
+  });
+  if (!(d.rounds || []).length) box.appendChild(el('div', 'resrow', d.share || ''));
+  $('resCopy').textContent = 'Copy result'; $('resSheet').hidden = false; $('resSheet').scrollTop = 0;
+  try { $('resCopy').focus({ preventScroll: true }); } catch (e) { /* ignore */ }
+}
+function closeResults() { $('resSheet').hidden = true; }
+$('doneView').addEventListener('click', function () { Sfx.unlock(); Sfx.click(); openResults(); });
+$('resX').addEventListener('click', closeResults); $('resBack').addEventListener('click', closeResults);
+$('resSheet').addEventListener('click', function (e) { if (e.target === this) closeResults(); });
+$('resCopy').addEventListener('click', function () { const d = loadDaily(); if (d) copyText(d.share || '', $('resCopy'), 'Copy result'); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('resSheet').hidden) { e.preventDefault(); closeResults(); } });
 $('doneNotes').addEventListener('click', function () { Sfx.click(); $('sumView').hidden = true; $('revView').hidden = false; show('final'); openReview(); });
 $('doneCopy').addEventListener('click', function () { const d = loadDaily(); if (d) copyText(d.share || '', $('doneCopy'), 'Copy result'); });
 $('rareClose').addEventListener('click', function () { Sfx.click(); closeRare(); });
@@ -7969,7 +8038,7 @@ function giantCleanup() {
 function giantHome() { giantCleanup(); showIntro(); }
 function bossPrompt() {
   if ($('final').hidden || !$('bossPrompt').hidden || loadGiant()) return;
-  try { $('bpRowan').src = RW.struck.src; } catch (e) { /* ignore */ }
+  try { ['f1', 'f2', 'f3'].forEach(function (k, i) { $('bpF' + (i + 1)).src = BOSS_IMG[k + '_idle']; }); } catch (e) { /* ignore */ }
   try { Sfx.rumble(true); } catch (e) { /* ignore */ }
   $('bossPrompt').hidden = false; try { $('bpFight').focus({ preventScroll: true }); } catch (e) { /* ignore */ }
 }
