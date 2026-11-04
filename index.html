@@ -15,7 +15,6 @@
 <meta name="twitter:image" content="https://dailysummit.io/og.png">
 <link rel="icon" href="data:,">
 
-
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -724,6 +723,85 @@
 .pvb { background: linear-gradient(180deg,#fff7e6,#eadbb8); border: 1.5px solid #6b5230; border-radius: 8px; color: #2a1c10 }
 .pvb:last-child { background: linear-gradient(180deg,#D8493B,#8E2219); color: #fff; border-color: #5a1510 }
 
+  /* ===================== fit on one screen: compact intro, narrower cliff ===================== */
+  #intro { justify-content: flex-start; gap: 8px; padding-top: max(10px, env(safe-area-inset-top)); padding-bottom: max(10px, env(safe-area-inset-bottom)); }
+  .brand { padding-top: 1.2vh; }
+  .brand .kick { font-size: 10px; letter-spacing: .26em; }
+  .wordmark { font-size: clamp(54px, min(20vw, 13vh), 108px); }
+  .brand .sub { margin-top: 2px; font-size: 14px; }
+  .intro-card { padding: 14px 14px 12px; gap: 8px; grid-template-columns: repeat(3, 1fr); }
+  .intro-card > *:not(.linkbtn) { grid-column: 1 / -1; }
+  .lede { font-size: clamp(15px, 4.2vw, 18px) !important; line-height: 1.2 !important; }
+  .rules4 { gap: 5px; }
+  .rules4 li { grid-template-columns: 28px 1fr; gap: 8px; padding: 6px 9px; }
+  .rules4 .n { width: 28px; height: 28px; font-size: 15px; }
+  .rules4 b { font-size: 14px; line-height: 1.2; }
+  .rules4 i { font-size: 12px; margin-top: 1px; line-height: 1.25; }
+  .rmeta { font-size: 11px; }
+  .route { font-size: 13px; }
+  #startBtn { padding-top: 14px; padding-bottom: 14px; }
+  #unlimBtn { padding-top: 11px; padding-bottom: 11px; }
+  .intro-card .linkbtn { padding: 2px; font-size: 12.5px; white-space: nowrap; }
+  .intro-card .foot { font-size: 11px !important; line-height: 1.35 !important; text-align: center; }
+  html.wide .rules4 { grid-template-columns: 1fr 1fr; }
+  html.wide .screen { max-width: calc(620px + 2 * var(--gut)); }
+  @media (max-height: 780px) {
+    .rules4 i { display: none; }
+    .intro-card .foot { display: none; }
+    .intro-card { gap: 6px; }
+  }
+  @media (max-height: 640px) {
+    .brand .sub { display: none; }
+    .wordmark { font-size: clamp(46px, 11vh, 80px); }
+    .rules4 li { padding: 4px 8px; }
+  }
+
+  details.pvpanel { margin-top: 2px; padding: 6px 10px; gap: 0; display: block; }
+  details.pvpanel > summary { cursor: pointer; font: 700 11px var(--sans); letter-spacing: .06em; list-style-position: inside; }
+  details.pvpanel[open] { display: grid; gap: 8px; padding: 8px 10px 10px; }
+
+  /* ===================== compact final screen + route picker ===================== */
+  #final { gap: 6px; padding-top: max(10px, env(safe-area-inset-top)); padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+  #final .card { padding: 10px 14px 10px; }
+  .fkick { font-size: 10px; }
+  .fbig { font-size: clamp(48px, min(17vw, 9.5vh), 82px); line-height: .9; }
+  .rankchip { margin-top: 2px; gap: 10px; }
+  .rankchip .emb, .rankchip .emb.t4, .rankchip .emb.t5, .rankchip .emb.t6, .rankchip .emb.t7 { --es: 56px; }
+  .rk-txt { gap: 4px; }
+  .pbar { margin-top: 8px; height: 10px; }
+  .pips.big { margin-top: 6px; padding: 2px 4px; }
+  .hint { margin: 4px 2px 2px; font-size: 12.5px; }
+  #rows { display: grid; gap: 5px; }
+  .rrow { padding: 5px 10px 5px 12px; gap: 0 8px; }
+  .rrow .q { font-size: 11px; }
+  .rrow .a { font-size: 14.5px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rrow .gr { gap: 2px; }
+  .rrow .gr b { font-size: 18px; }
+  .rrow .stamp { font-size: 9.5px; padding: 2px 4px; }
+  .acts { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 2px; }
+  .acts .btn { padding: 12px 6px; font-size: 12px; letter-spacing: .06em; }
+  textarea.share { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  #homeBtn { margin-top: 2px !important; }
+
+  #pick { gap: 8px; padding-top: max(10px, env(safe-area-inset-top)); padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+  .pickhead h2 { font-size: clamp(28px, 8vw, 40px); }
+  #pick .card { padding: 10px 12px 12px; }
+  .tile { min-height: 0; padding: 8px 10px 8px 14px; grid-template-columns: auto 1fr; column-gap: 8px; row-gap: 0; align-items: center; }
+  .tile .te { font-size: 22px; grid-row: 1 / 3; }
+  .tile .tn { font-size: 16px; }
+  .tile .td { grid-column: 2; font-size: 11.5px; line-height: 1.25; }
+  .tile .tb { display: none; }
+  .tile.mix { padding: 8px 12px 8px 14px; }
+  @media (max-width: 520px), (max-height: 800px) { .tile .td { display: none; } .tile { padding-top: 10px; padding-bottom: 10px; } }
+  .rrow { margin: 0 !important; }
+  .acts .btn, #nextRoute { grid-column: auto !important; width: 100%; }
+  #final > #sumView { display: grid; gap: 6px; }
+  @media (max-height: 800px) {
+    .rrow { padding-top: 4px; padding-bottom: 4px; }
+    .fbig { font-size: clamp(42px, 8vh, 68px); }
+    #final .card { padding-top: 8px; padding-bottom: 8px; }
+  }
+
 </style>
 
 <canvas id="world" role="img" aria-label="An illustrated mountain in an expedition journal. Your climber ascends as your score grows."></canvas>
@@ -752,17 +830,17 @@
   <div class="card taped intro-card">
     <p class="lede">7 rounds. 25 seconds each. Climb as high as you can.</p>
     <ol class="rules4">
-      <li><span class="n">1</span><div><b>Rarer answers = more feet.</b><i>Common 10 · Uncommon 25 · Rare 50 · Unicorn 100</i></div></li>
+      <li><span class="n">1</span><div><b>Rarer answers = more feet.</b><i>Common 15 · Uncommon 30 · Rare 60 · Unicorn 120</i></div></li>
       <li class="bad"><span class="n">⚠</span><div><b>Never say the most common answer.</b><i>Rockfall wipes out that round's climb.</i></div></li>
-      <li><span class="n">3</span><div><b>3 safe answers per round.</b><i>They pay ×1, then ×2, then ×5.</i></div></li>
+      <li><span class="n">3</span><div><b>3 safe answers per round.</b><i>They pay ×1, then ×3, then ×5.</i></div></li>
       <li><span class="n">⛺</span><div><b>Set camp to bank your climb.</b><i>Press Enter on an empty box, or tap the camp button.</i></div></li>
     </ol>
     <div class="rmeta">Final round pays double</div>
     <details class="rules">
       <summary>Full rules &amp; ranks</summary>
       <dl>
-        <div><dt>Climb</dt><dd>Every point is a foot of altitude. Rarer answers are worth more: 10, 25, 50 or 100.</dd></div>
-        <div><dt>Chain</dt><dd>Up to 3 safe answers a round, worth ×1, ×2, then ×5.</dd></div>
+        <div><dt>Climb</dt><dd>Every point is a foot of altitude. Rarer answers are worth more: 15, 30, 60 or 120.</dd></div>
+        <div><dt>Chain</dt><dd>Up to 3 safe answers a round, worth ×1, ×3, then ×5.</dd></div>
         <div><dt>Rockfall</dt><dd>Name one of the most common answers and you lose the round's climb. Later rounds have more rockfalls: 1 in rounds 1-3, 2 in rounds 4-6, 3 in the Final Push.</dd></div>
         <div><dt>Camp</dt><dd>Bank after any safe answer. A fall only drops you to your last camp. A full chain or the clock running out banks for you.</dd></div>
         <div><dt>Final Push</dt><dd>Round 7 pays double.</dd></div>
@@ -949,9 +1027,9 @@
   <div class="sheet card taped howsheet" role="dialog" aria-modal="true" aria-labelledby="howT" style="max-width:440px">
     <div><div class="k">Before you climb</div><h3 id="howT">How to play</h3></div>
     <ol class="rules4">
-      <li><span class="n">1</span><div><b>Rarer answers = more feet.</b><i>Common 10 · Uncommon 25 · Rare 50 · Unicorn 100</i></div></li>
+      <li><span class="n">1</span><div><b>Rarer answers = more feet.</b><i>Common 15 · Uncommon 30 · Rare 60 · Unicorn 120</i></div></li>
       <li class="bad"><span class="n">⚠</span><div><b>Never say the most common answer.</b><i>Rockfall wipes out that round's climb.</i></div></li>
-      <li><span class="n">3</span><div><b>3 safe answers per round.</b><i>They pay ×1, then ×2, then ×5.</i></div></li>
+      <li><span class="n">3</span><div><b>3 safe answers per round.</b><i>They pay ×1, then ×3, then ×5.</i></div></li>
       <li><span class="n">⛺</span><div><b>Set camp to bank your climb.</b><i>Press Enter on an empty box, or tap the camp button.</i></div></li>
     </ol>
     <div class="rmeta">7 rounds · 25 seconds each · final round pays double</div>
@@ -4004,7 +4082,8 @@ const TIER_FIELDS = [['top', 0], ['t10', 10], ['t25', 25], ['t50', 50], ['t100',
 const TIER_NAMES = { 0: 'Rockfall', 10: 'Common', 25: 'Uncommon', 50: 'Rare', 100: 'Unicorn' };
 const ROUND_SECONDS = 25;
 const MAX_CHAIN = 3;
-const MULTS = [1, 2, 5];
+const MULTS = [1, 3, 5];
+const PTS = { 10: 15, 25: 30, 50: 60, 100: 120 };
 const RANKS = [
   { name: 'Bronze', min: 0, zone: 'Foothills' },
   { name: 'Silver', min: 400, zone: 'Treeline' },
@@ -4170,7 +4249,7 @@ function effectiveTier(g, tc) {
   return g.rank <= tc ? 0 : 10;
 }
 
-function answerPoints(base, safeBefore) { return base * MULTS[safeBefore]; }
+function answerPoints(base, safeBefore) { return (PTS[base] || base) * MULTS[safeBefore]; }
 
 function roundPoints(answers, isFinal) {
   let sum = 0;
@@ -4278,7 +4357,7 @@ const World = (function () {
     w.wide = iw >= 900;
     w.u = w.wide ? clamp(Math.min(ih / 800, iw * 0.52 / 592), 1, 1.7) : 1;
     w.dpr = dpr; w.W = iw / w.u; w.H = ih / w.u;
-    w.eb = w.wide ? 700 + (w.W - 700) * 0.3 : w.W * 0.6;
+    w.eb = w.wide ? 700 + (w.W - 700) * 0.58 : w.W * 0.74;
     document.documentElement.style.setProperty('--z', String(w.u));
     document.documentElement.classList.toggle('wide', w.wide);
     cv.width = Math.round(iw * dpr); cv.height = Math.round(ih * dpr);
@@ -6215,7 +6294,7 @@ function previewFinal(idx) {
 function buildPreviewPanel() {
   if (!window.ARTIFACT_PREVIEW) return;
   const host = document.querySelector('#intro .intro-card'); if (!host || host.querySelector('.pvpanel')) return;
-  const box = el('div', 'pvpanel'); box.appendChild(el('div', 'pvt', 'Preview a rank screen (shown only in this Claude artifact)'));
+  const box = document.createElement('details'); box.className = 'pvpanel'; const sm = document.createElement('summary'); sm.className = 'pvt'; sm.textContent = 'Tester shortcuts (Claude artifact only)'; box.appendChild(sm);
   const row = el('div', 'pvrow');
   RANKS.forEach(function (r, i) { const b = el('button', 'pvb', r.name); b.type = 'button'; b.addEventListener('click', function () { previewFinal(i); }); row.appendChild(b); });
   const gb = el('button', 'pvb', '⚡ Storm Wraith boss'); gb.type = 'button'; gb.addEventListener('click', function () { openGiant(true); }); row.appendChild(gb);
@@ -6252,7 +6331,7 @@ const GRADES = {
   safe: { n: 'SAFE CLIMB', i: '✚' }, none: { n: 'NO CLIMB', i: '–' }, rock: { n: 'ROCKFALL', i: '▲' }
 };
 const fmt = function (n) { return Math.round(n).toLocaleString('en-US'); };
-function gradeOf(r) { return r.bust ? 'rock' : r.points >= 300 ? 'legend' : r.points >= 120 ? 'amaze' : r.points >= 50 ? 'nice' : r.points > 0 ? 'safe' : 'none'; }
+function gradeOf(r) { return r.bust ? 'rock' : r.points >= 400 ? 'legend' : r.points >= 170 ? 'amaze' : r.points >= 70 ? 'nice' : r.points > 0 ? 'safe' : 'none'; }
 function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 function rankIndex(score) { return RANKS.indexOf(rankFor(score)); }
 function loadBest() { try { const v = JSON.parse(localStorage.getItem('summit-best') || 'null'); return v && typeof v.score === 'number' ? v : null; } catch (e) { return null; } }
@@ -6552,8 +6631,8 @@ function endRound(reason) {
   if (c.bust) { world.setBanked(S.total); world.setTarget(S.total - c.points); world.rockfall(); Sfx.rumble(c.tc > 1); altCount(S.total); }
   else if (c.points > 0) {
     world.setTarget(S.total); world.setCamp(S.total); altCount(S.total);
-    world.burst(['#f0b020', '#fffaf0', '#5bb878', '#3aa0e0'], c.points >= 300 ? 60 : 26, 1.1);
-    Sfx.camp(c.points >= 120); if (c.points >= 300) { flash(); rays(); world.coins(30); }
+    world.burst(['#f0b020', '#fffaf0', '#5bb878', '#3aa0e0'], c.points >= 400 ? 60 : 26, 1.1);
+    Sfx.camp(c.points >= 170); if (c.points >= 400) { flash(); rays(); world.coins(30); }
   } else Sfx.nothing();
   renderResult(reason);
 }
