@@ -2,7 +2,7 @@
 <main class="seo-only"><h2>The Daily Summit: a daily trivia game where rare answers win</h2><p>The Daily Summit is a free daily trivia game at dailysummit.io. Each day has seven questions, like name a pizza topping, a road trip essential or a famous mountain. The rarer your answer, the more feet you climb: Common, Uncommon, Rare and Unicorn answers are worth more. Say one of the most common answers and a rockfall knocks you back to your last camp.</p><h2>How to play The Daily Summit</h2><p>You get 25 seconds per round and up to three safe answers, which pay times one, three and five. Set camp to bank your climb. The Final Push in round seven pays double. Climb through Bronze, Silver, Gold, Platinum, Diamond, Apex and Mythic to the Sovereign rank at 2,500 feet, which unlocks a secret daily boss fight against the Storm Wraith.</p><p>Play today's daily climb, share your result with friends, or pick an unlimited route like food, animals, geography, sports, music, movies and slang.</p></main><noscript><h1>The Daily Summit: the rare-answer trivia game</h1><p>The Daily Summit needs JavaScript to play. Turn it on and reload to climb today's mountain.</p></noscript>
 
 <meta name="claude:viewport-fit-sides" content="cover">
-<script>(function(){try{if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('pre-open')}catch(e){}})();</script>
+<script>(function(){try{var t=new Date(),k=t.getFullYear()+'-'+t.getMonth()+'-'+t.getDate(),s=null;try{s=localStorage.getItem('summit-intro-ymd')}catch(e){}if(s!==k&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('pre-open')}catch(e){}})();</script>
 <style>html.pre-open{background:#05040a}html.pre-open body{visibility:hidden}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13142,7 +13142,7 @@ function playOpening() {
   at(6200, function () { cur.classList.add('leave'); root.classList.add('reveal'); });
   at(8800, finish);
 }
-function shouldOpen() { const d = String(dayNumber()); let seen = null; try { seen = localStorage.getItem('summit-intro'); } catch (e) { /* ignore */ } try { localStorage.setItem('summit-intro', d); } catch (e) { /* ignore */ } return true; }
+function shouldOpen() { const t = new Date(), k = t.getFullYear() + '-' + t.getMonth() + '-' + t.getDate(); let seen = null; try { seen = localStorage.getItem('summit-intro-ymd'); } catch (e) { /* ignore */ } try { localStorage.setItem('summit-intro-ymd', k); } catch (e) { /* ignore */ } return seen !== k; } // the full opening plays on the first visit of each day; Replay intro is always there
 $('ranksBtn').addEventListener('click', function () { Sfx.unlock(); openRanks(); });
 $('ranksClose').addEventListener('click', closeRanks);
 $('ranksSheet').addEventListener('click', function (e) { if (e.target === this) closeRanks(); });
