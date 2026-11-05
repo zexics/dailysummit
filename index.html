@@ -7973,7 +7973,7 @@ $('replayBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click()
   const card = document.querySelector('#intro .intro-card');
   if (card && !card.parentNode.classList.contains('pwrap')) {
     const w = document.createElement('div'); w.className = 'pwrap'; card.parentNode.insertBefore(w, card); w.appendChild(card);
-    ['t', 'b'].forEach(function (k) { const c = document.createElement('i'); c.className = 'pr ' + k; c.setAttribute('aria-hidden', 'true'); w.appendChild(c); });
+    ['b'].forEach(function (k) { const c = document.createElement('i'); c.className = 'pr ' + k; c.setAttribute('aria-hidden', 'true'); w.appendChild(c); });
   }
   const tag = $('rowanTag'); let tagT = 0;
   function overlap(a, b) { const x = Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)), y = Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top)); return x * y; }
