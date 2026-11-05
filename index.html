@@ -859,7 +859,7 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
 .gcine[hidden] { display: none; }
 .gcine.in { opacity: 1; }
 .gcine.out { opacity: 0; }
-.gcine.intro { cursor: pointer; }
+.gcine { cursor: pointer; }
 .gcine.pause { background: #07040f; }
 .gcine.win { background: radial-gradient(ellipse at 50% 38%, rgba(190, 120, 120, .94) 0%, rgba(90, 44, 120, .96) 55%, rgba(20, 12, 50, .98) 100%); }
 .gcine.lose { background: radial-gradient(ellipse at 50% 40%, rgba(96, 26, 36, .95) 0%, rgba(14, 6, 20, .98) 72%); }
@@ -892,8 +892,7 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
 .gc-count { min-height: 62px; font: italic 900 clamp(48px, 15vw, 76px)/1 var(--serif); color: #fffaf0; text-shadow: 0 4px 0 #b8372b, 0 8px 0 rgba(0, 0, 0, .35), 0 0 30px rgba(255, 140, 80, .8); }
 .gc-count.gcpop { animation: gcpop2 .5s cubic-bezier(.2, 1.4, .4, 1) both; }
 .gcine:not(.intro) .gc-count:empty { display: none; }
-.gc-hint { display: none; font: 800 10.5px/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: rgba(205, 189, 245, .7); }
-.gcine.intro .gc-hint { display: block; }
+.gc-hint { display: block; margin-top: 4px; font: 800 10.5px/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: rgba(205, 189, 245, .7); }
 @keyframes gcpop { 0% { transform: scale(.82); } 100% { transform: scale(1); } }
 @keyframes gcpop2 { 0% { transform: scale(1.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 @keyframes gcrise { 0% { transform: translateY(26px) scale(.7); opacity: 0; } 100% { transform: none; opacity: 1; } }
@@ -1081,7 +1080,7 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
     <div class="gc-sub" id="gcSub"></div>
     <div class="gc-stats" id="gcStats"></div>
     <div class="gc-count" id="gcCount"></div>
-    <div class="gc-hint">Tap to skip</div>
+    <div class="gc-hint">Tap or press Enter to skip</div>
   </div>
 </div>
 
@@ -8007,26 +8006,44 @@ function gcShow(o) { // o: mode (intro | clear | evolve | win | lose), kick, tit
   B.hidden = o.b == null; ar.hidden = o.b == null; if (o.b != null) B.src = gcImg(o.b);
   const st = $('gcStats'); st.innerHTML = '';
   (o.stats || []).forEach(function (s) { const d = el('span', 'gc-stat'); d.appendChild(el('b', '', s[1])); d.appendChild(el('i', '', s[0])); st.appendChild(d); });
-  $('gcCount').textContent = ''; c.hidden = false; c.removeAttribute('aria-hidden'); void c.offsetWidth; c.classList.add('in');
+  $('gcCount').textContent = ''; G.cineAt = performance.now(); c.hidden = false; c.removeAttribute('aria-hidden'); void c.offsetWidth; c.classList.add('in');
 }
 function gcHide() { const c = $('gCine'); if (c.hidden) return; c.classList.remove('in'); c.classList.add('out'); setTimeout(function () { if (c.classList.contains('out')) c.hidden = true; }, 280); }
-function gIntroSeq() { // the phase title card, then a 3-2-1-FIGHT countdown. Tap to skip.
-  const ph = G.ph, p = GPH[ph], seq = G.seq = (G.seq || 0) + 1;
-  const ok = function () { return G && !G.over && G.seq === seq; };
-  const step = function (fn, ms) { gLater(function () { if (ok()) fn(); }, ms); };
-  const go = function () { gcHide(); gStartPhase(); };
-  G.busy = true; $('gInput').disabled = true; gBossUi();
-  gcShow({ mode: 'intro', kick: ph > 0 ? 'Phase ' + (ph + 1) + ' of 3 \u00b7 new question' : 'Phase 1 of 3', title: p.name, sub: p.intro, a: ph, stats: [['Level', 'Lv.' + p.lv], ['Health', String(p.hp)], ['Clock', p.secs + 's']] });
-  if (ph > 0) { flash(); Sfx.bossNext(); }
-  [[3, 1800], [2, 2350], [1, 2900]].forEach(function (n) { step(function () { $('gcCount').textContent = n[0]; retrigger($('gcCount'), 'gcpop'); Sfx.bossTick(n[0]); }, n[1]); });
-  step(function () { $('gcCount').textContent = 'FIGHT!'; retrigger($('gcCount'), 'gcpop'); shakeWorld(); flash(); }, 3450);
-  step(go, 4000);
-  G.skip = function () { if (!ok()) return; G.seq++; go(); };
+function gRun(steps) { // steps: [delayAfterPrevious, fn, flags]; flags 'k' = a card you can skip to, 'm' = must run even when skipped over
+  const id = G.runId = (G.runId || 0) + 1; let i = 0, tid = 0;
+  const alive = function () { return G && G.runId === id; };
+  const sched = function () { if (i < steps.length) { tid = setTimeout(fire, steps[i][0]); G.tos.push(tid); } else G.skip = null; };
+  const fire = function () { if (!alive()) return; const s = steps[i++]; s[1](); if (alive()) sched(); };
+  G.skip = function () {
+    if (!alive() || performance.now() - (G.cineAt || 0) < 250) return;
+    clearTimeout(tid);
+    while (i < steps.length && (steps[i][2] || '').indexOf('k') < 0) { const s = steps[i++]; if ((s[2] || '').indexOf('m') >= 0) s[1](); if (!alive()) return; }
+    if (i < steps.length) fire(); else G.skip = null;
+  };
+  sched();
 }
-$('gCine').addEventListener('click', function () { if (G && G.skip && $('gCine').classList.contains('intro')) G.skip(); });
+function gIntroSeq() { // the phase title card, then a quick 3-2-1-FIGHT countdown
+  const ph = G.ph, p = GPH[ph];
+  G.busy = true; $('gInput').disabled = true; gBossUi();
+  const num = function (n) { return [450, function () { $('gcCount').textContent = n; retrigger($('gcCount'), 'gcpop'); Sfx.bossTick(n); }]; };
+  gRun([
+    [0, function () {
+      gcShow({ mode: 'intro', kick: ph > 0 ? 'Phase ' + (ph + 1) + ' of 3 \u00b7 new question' : 'Phase 1 of 3', title: p.name, sub: p.intro, a: ph, stats: [['Level', 'Lv.' + p.lv], ['Health', String(p.hp)], ['Clock', p.secs + 's']] });
+      if (ph > 0) { flash(); Sfx.bossNext(); }
+    }, 'k'],
+    [1300].concat(num(3).slice(1)), num(2), num(1),
+    [450, function () { $('gcCount').textContent = 'FIGHT!'; retrigger($('gcCount'), 'gcpop'); shakeWorld(); flash(); }],
+    [500, function () { gcHide(); gStartPhase(); }, 'k']
+  ]);
+}
+$('gCine').addEventListener('click', function () { if (G && G.skip) G.skip(); });
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Enter' || !G || !G.skip || $('gCine').hidden || !$('giantExit').hidden || !$('giantEnd').hidden) return;
+  e.preventDefault(); e.stopPropagation(); G.skip();
+}, true);
 function gStartPhase() {
   const p = GPH[G.ph], now = performance.now();
-  G.hp = p.hp; G.combo = 0; G.phDmg = 0; G.phCombo = 0; G.used = new Set(); G.prompt = G.prompts[G.ph]; G.warn = null; G.busy = false;
+  G.skip = null; G.hp = p.hp; G.combo = 0; G.phDmg = 0; G.phCombo = 0; G.used = new Set(); G.prompt = G.prompts[G.ph]; G.warn = null; G.busy = false;
   $('gPrompt').textContent = G.prompt.text; $('gFeed').innerHTML = ''; $('gWarn').hidden = true;
   gBossUi(); gHp(1); gCombo(); giantLayout();
   G.deadline = now + p.secs * 1000 + 400; G.maxMs = p.secs * 1000 + 400; G.nextWarn = now + 500 + (p.warnMin + Math.random() * (p.warnMax - p.warnMin)) * 1000;
@@ -8087,21 +8104,22 @@ function gPhaseClear() {
   G.busy = true; clearInterval(G.timer); G.warn = null; $('gWarn').hidden = true; world.giantSet({ warn: 0 }); Sfx.bossWarn(false); Sfx.bossMusic(false); $('gInput').disabled = true; $('gInput').blur();
   G.cleared = G.ph + 1; const p = GPH[G.ph];
   const stats = [['Damage', fmt(G.phDmg || 0)], ['Best combo', '\u00d7' + (1 + Math.min(G.phCombo || 0, 5) * 0.2).toFixed(1)], ['Hearts', G.hearts + '/3']];
-  gLater(function () { Sfx.bossDeath(G.ph === 2); flash(); shakeWorld(); gSay(p.name + ' is defeated!', true); world.giantSet({ dying: 0.01 }); }, 100);
-  if (G.ph === 2) {
-    gLater(function () { Sfx.bossVictory(); rays(); sunrise(); }, 1500);
-    gLater(function () { gcShow({ mode: 'win', kick: 'Victory', title: p.name + ' falls!', sub: 'The storm breaks and the sky clears.', a: 2, stats: [['Total damage', fmt(G.dmg)], ['Forms beaten', '3/3'], ['Hearts', G.hearts + '/3']] }); }, 2500);
-    gLater(function () { gcHide(); }, 4600);
-    gLater(function () { gEnd(true, ''); }, 4900);
-    return;
-  }
-  const nx = GPH[G.ph + 1];
-  gLater(function () { gcShow({ mode: 'clear', kick: 'Phase ' + (G.ph + 1) + ' cleared', title: p.name + ' is down!', sub: 'Its storm is falling apart...', a: G.ph, stats: stats }); }, 1000);
-  gLater(function () { gcHide(); }, 3200);
-  gLater(function () { gcShow({ mode: 'pause', sub: 'Something else stirs in the storm...' }); gSay('...', false); }, 3600);
-  gLater(function () { gSay(nx.name + ' is rising!', true, true); gcShow({ mode: 'evolve', kick: 'A new foe rises', title: p.name + ' \u279c ' + nx.name, sub: 'Stronger, with a brand new question. Lv.' + p.lv + ' \u279c Lv.' + nx.lv, a: G.ph, b: G.ph + 1 }); world.giantEvolve(G.ph + 1); Sfx.bossEvolve(G.ph); flash(); }, 4900);
-  gLater(function () { gcHide(); }, 7100);
-  gLater(function () { G.ph += 1; gBossUi(); gHp(0); setTimeout(function () { gHp(1); }, 60); shakeWorld(); gIntroSeq(); }, 7800);
+  const last = G.ph === 2, nx = GPH[Math.min(2, G.ph + 1)];
+  if (last) gRun([
+    [100, function () { Sfx.bossDeath(true); flash(); shakeWorld(); gSay(p.name + ' is defeated!', true); world.giantSet({ dying: 0.01 }); }, 'm'],
+    [1200, function () { Sfx.bossVictory(); rays(); sunrise(); }, 'm'],
+    [1000, function () { gcShow({ mode: 'win', kick: 'Victory', title: p.name + ' falls!', sub: 'The storm breaks and the sky clears.', a: 2, stats: [['Total damage', fmt(G.dmg)], ['Forms beaten', '3/3'], ['Hearts', G.hearts + '/3']] }); }, 'k'],
+    [2400, function () { gcHide(); }, 'm'],
+    [300, function () { gEnd(true, ''); }, 'k']
+  ]);
+  else gRun([
+    [100, function () { Sfx.bossDeath(false); flash(); shakeWorld(); gSay(p.name + ' is defeated!', true); world.giantSet({ dying: 0.01 }); }, 'm'],
+    [900, function () { gcShow({ mode: 'clear', kick: 'Phase ' + (G.ph + 1) + ' cleared', title: p.name + ' is down!', sub: 'Its storm is falling apart...', a: G.ph, stats: stats }); }, 'k'],
+    [1900, function () { gcHide(); }, 'm'],
+    [400, function () { gSay(nx.name + ' is rising!', true, true); gcShow({ mode: 'evolve', kick: 'A new foe rises', title: p.name + ' \u279c ' + nx.name, sub: 'Stronger, with a brand new question. Lv.' + p.lv + ' \u279c Lv.' + nx.lv, a: G.ph, b: G.ph + 1 }); world.giantEvolve(G.ph + 1); Sfx.bossEvolve(G.ph); flash(); }, 'k'],
+    [1900, function () { gcHide(); }, 'm'],
+    [400, function () { G.ph += 1; gBossUi(); gHp(0); setTimeout(function () { gHp(1); }, 60); shakeWorld(); gIntroSeq(); }, 'k']
+  ]);
 }
 function gShare(r) {
   const dots = [0, 1, 2].map(function (i) { return i < r.phases ? '🟨' : '⬛'; }).join(''), hearts = [0, 1, 2].map(function (i) { return i < r.hearts ? '❤️' : '🖤'; }).join('');
@@ -8116,9 +8134,11 @@ function gEnd(win, why) {
   if (win) { gShowEnd(r); return; }
   world.giantSet({ laugh: 1 }); vignette('hit', 700); Sfx.bossDefeat();
   if (why === 'time') gSay("Time's up! The storm swallows you.", true);
-  gLater(function () { gcShow({ mode: 'lose', kick: 'Defeated', title: why === 'time' ? "Time's up!" : 'Out of hearts!', sub: 'The storm swallows you...', a: G.ph, stats: [['Forms beaten', G.cleared + '/3'], ['Damage', fmt(G.dmg)]] }); }, 500);
-  gLater(function () { gcHide(); }, 2700);
-  gLater(function () { gShowEnd(r); }, 3000);
+  gRun([
+    [500, function () { gcShow({ mode: 'lose', kick: 'Defeated', title: why === 'time' ? "Time's up!" : 'Out of hearts!', sub: 'The storm swallows you...', a: G.ph, stats: [['Forms beaten', G.cleared + '/3'], ['Damage', fmt(G.dmg)]] }); }, 'k'],
+    [2000, function () { gcHide(); }, 'm'],
+    [300, function () { gShowEnd(r); }, 'k']
+  ]);
 }
 function gHeartsRow(n) { let h = ''; for (let i = 0; i < 3; i++) h += gHeartSvg(i < n); return h; }
 function gDateLbl() { return new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }); }
