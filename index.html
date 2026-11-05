@@ -4,7 +4,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..900;1,9..144,600..800&family=Inter:wght@400..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..900;1,9..144,600..800&family=Inter:wght@400..800&family=Caveat:wght@700&display=swap">
 <style>
   :root {
     color-scheme: light;
@@ -904,6 +904,44 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
 @media (prefers-reduced-motion: reduce) { .gc-card, .gc-forms img, .gc-arrow, .gc-count, .gcine .gc-sub { animation: none !important; transform: none !important; } .gcine.clear #gcA, .gcine.win #gcA { opacity: .35; } }
 @media (max-height: 640px) { .gc-forms img { height: 104px; } .gc-forms img:only-of-type { height: 118px; } .gc-title { font-size: 34px; } .gc-count { min-height: 52px; font-size: 48px; } }
 
+/* ---- Rowan's handwritten label (no paper) ---- */
+.rtag { position: fixed; z-index: 6; width: 0; height: 0; pointer-events: none; animation: rtfade .8s ease-out .2s both; }
+.rtag[hidden] { display: none; }
+.rtag .rt-name { position: absolute; right: 62px; top: -66px; font: 700 36px/1 "Caveat", "Segoe Script", "Bradley Hand", "Snell Roundhand", "Comic Sans MS", cursive; color: #fffaf0; letter-spacing: .01em; transform: rotate(-7deg); transform-origin: right bottom; white-space: nowrap; text-shadow: 0 2px 0 rgba(30, 20, 10, .6), 0 0 12px rgba(0, 0, 0, .55); animation: rtbob 3.2s ease-in-out infinite; }
+.rtag .rt-arrow { position: absolute; left: -70px; top: -46px; overflow: visible; fill: none; stroke: #fffaf0; stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 2px 0 rgba(30, 20, 10, .6)) drop-shadow(0 0 6px rgba(0, 0, 0, .5)); animation: rtbob 3.2s ease-in-out infinite; }
+@keyframes rtfade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rtbob { 0%, 100% { translate: 0 0; } 50% { translate: 2px 3px; } }
+@media (prefers-reduced-motion: reduce) { .rtag, .rtag .rt-name, .rtag .rt-arrow { animation: none; } }
+
+/* ---- start menu paper: grain, fibres, foxing, worn edges, curled corners ---- */
+.pwrap { position: relative; filter: drop-shadow(0 22px 26px rgba(8, 6, 20, .42)) drop-shadow(0 1px 0 rgba(43, 34, 24, .55)); }
+.pwrap .intro-card {
+  --pbump: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.05' numOctaves='4' seed='7' stitchTiles='stitch' result='n'/%3E%3CfeDiffuseLighting in='n' lighting-color='%23fff' surfaceScale='1.7'%3E%3CfeDistantLight azimuth='235' elevation='64'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  --pfib: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='f' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03 .6' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .52 0 0 0 0 .38 0 0 0 0 .2 0 0 0 1.25 -.72'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  background-color: #f3e8cc;
+  background-image:
+    var(--pbump), var(--pfib),
+    radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(168, 128, 62, .30) 100%),
+    radial-gradient(circle at 14% 22%, rgba(196, 150, 70, .16) 0, transparent 22%),
+    radial-gradient(circle at 88% 64%, rgba(184, 140, 64, .15) 0, transparent 26%),
+    radial-gradient(circle at 40% 92%, rgba(176, 134, 66, .12) 0, transparent 20%),
+    linear-gradient(180deg, #f9f1dc 0%, #f1e5c6 100%);
+  background-blend-mode: multiply, normal, normal, normal, normal, normal, normal;
+  background-size: 320px 320px, 260px 260px, auto, auto, auto, auto, auto;
+  border: 1px solid rgba(110, 82, 40, .55); border-radius: 6px 10px 0 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 252, 240, .55), inset 0 0 34px rgba(150, 110, 50, .22), inset 0 -18px 26px rgba(120, 86, 40, .10);
+  clip-path: polygon(-30px -40px, calc(100% + 30px) -40px, calc(100% + 30px) calc(100% - 42px), 100% calc(100% - 42px), calc(100% - 42px) 100%, 28px 100%, 0 calc(100% - 28px), -30px calc(100% - 28px));
+}
+.pc { position: absolute; bottom: 0; width: 42px; height: 42px; pointer-events: none; }
+.pc.br { right: 0; }
+.pc.bl { left: 0; width: 28px; height: 28px; transform: scaleX(-1); }
+.pc b { position: absolute; inset: 0; display: block; }
+.pc .s { background: linear-gradient(to bottom right, rgba(40, 28, 12, .6) 50%, transparent 50%); transform: translate(-3px, -3px); filter: blur(3px); }
+.pc .f { clip-path: polygon(0 0, 100% 0, 0 100%); background: linear-gradient(to bottom right, #cdb784 0%, #e3d3a6 28%, #f6edd2 46%, #fffaec 50%); }
+.pc .f::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom right, transparent 44%, rgba(255, 255, 255, .85) 49%, rgba(110, 82, 40, .35) 50%, transparent 52%); }
+
+.pwrap .intro-card { padding-bottom: 26px; }
+
 </style>
 
 <canvas id="world" role="img" aria-label="An illustrated mountain in an expedition journal. Your climber ascends as your score grows."></canvas>
@@ -919,7 +957,7 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
   <div class="blk"></div><div class="wh" id="wh"></div>
   <div class="bar t"></div><div class="bar b"></div>
   <div class="hud" id="hud"><span class="rec">● REC</span><span id="hudTxt"></span></div>
-  <div class="plate"><small>Expedition leader</small><b>Rowan Ridgeway</b><span class="dayb">Day <span id="plateDay">1</span></span></div>
+  <div class="plate"><small>Reach the summit</small><b>The Daily Summit</b><span class="dayb">Day <span id="plateDay">1</span></span></div>
   <div class="skip">Tap to skip</div>
 </div>
 
@@ -1071,6 +1109,8 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
     <div id="secretRow" class="secret"></div>
   </div>
 </div>
+
+<div id="rowanTag" class="rtag" hidden aria-hidden="true"><span class="rt-name">Rowan</span><svg class="rt-arrow" viewBox="0 0 84 58" width="84" height="58"><path d="M5 9 C 30 -1, 64 8, 70 41" /><path d="M58 31 L70 46 L79 29" /></svg></div>
 
 <div id="gCine" class="gcine" hidden aria-hidden="true">
   <div class="gc-card">
@@ -7929,6 +7969,28 @@ window.ARTIFACT_PREVIEW = false;
 buildPreviewPanel();
 $('replayBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click(); window.scrollTo(0, 0); playOpening(); });
 
+/* ---- start menu: real-paper card (curled corners) and Rowan's handwritten label ---- */
+(function () {
+  const card = document.querySelector('#intro .intro-card');
+  if (card && !card.parentNode.classList.contains('pwrap')) {
+    const w = document.createElement('div'); w.className = 'pwrap'; card.parentNode.insertBefore(w, card); w.appendChild(card);
+    ['br', 'bl'].forEach(function (k) { const c = document.createElement('i'); c.className = 'pc ' + k; c.setAttribute('aria-hidden', 'true'); c.innerHTML = '<b class="s"></b><b class="f"></b>'; card.appendChild(c); });
+  }
+  const tag = $('rowanTag'); let tagT = 0;
+  function overlap(a, b) { const x = Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)), y = Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top)); return x * y; }
+  function place() {
+    const it = $('intro'), ok = it && !it.hidden && (!it.classList.contains('opening') || it.classList.contains('reveal')) && world && world.pos && !world.gi;
+    if (!ok) { tag.hidden = true; return; }
+    const u = world.u || 1, p = world.pos();
+    const tx = p.x * u, ty = p.y * u, cl = { left: tx - 30 * u, right: tx + 26 * u, top: ty - 76 * u, bottom: ty + 4 * u }, area = (cl.right - cl.left) * (cl.bottom - cl.top);
+    const tipX = tx - 4 * u, tipY = ty - 82 * u, lab = { left: tipX - 150, right: tipX - 20, top: tipY - 66, bottom: tipY - 8 };
+    let bad = tx < 60 || tx > window.innerWidth - 24 || ty < 90 || ty > window.innerHeight - 40 || lab.left < 4 || lab.top < 4;
+    ['.intro-card', '.brand .wordmark', '.brand .kick', '.brand .sub'].forEach(function (s) { const e = it.querySelector(s); if (e && !bad) { const r = e.getBoundingClientRect(); if (overlap(cl, r) > area * 0.15 || overlap(lab, r) > 0) bad = true; } });
+    if (bad) { tag.hidden = true; return; }
+    tag.style.left = tipX + 'px'; tag.style.top = tipY + 'px'; tag.hidden = false;
+  }
+  place(); window.addEventListener('resize', place); setInterval(place, 400);
+})();
 showIntro();
 if (shouldOpen()) playOpening();
 requestAnimationFrame(loop);
