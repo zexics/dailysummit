@@ -941,6 +941,11 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
 .pr::after { right: -4px; transform: rotate(8deg); background: radial-gradient(ellipse at 42% 50%, #6d4a22 0 18%, #b99358 20% 44%, #ecd9a6 48% 74%, #c9a468 78%); }
 .pwrap .intro-card { padding-top: 16px; padding-bottom: 16px; }
 
+/* Support the climb link */
+.supportlink { justify-self: center; font: 700 13px/1 var(--sans); color: #8a2f22; text-decoration: none; border: 1.5px dashed rgba(138, 47, 34, .55); padding: 7px 16px; border-radius: 999px; background: rgba(255, 250, 235, .65); }
+.supportlink[hidden] { display: none; }
+.supportlink:hover, .supportlink:focus-visible { background: #fff8e4; border-style: solid; }
+
 </style>
 
 <canvas id="world" role="img" aria-label="An illustrated mountain in an expedition journal. Your climber ascends as your score grows."></canvas>
@@ -1003,6 +1008,7 @@ html.wide .howsheet .rules4 li { padding: 9px 10px; }
     <button id="howBtn" class="linkbtn" type="button">❓ How to play</button>
     <button id="ranksBtn" class="linkbtn" type="button">🏅 Ranks &amp; secret</button>
     <button id="replayBtn" class="linkbtn" type="button">▶ Replay intro</button>
+    <a id="supportLink" class="supportlink" href="#" target="_blank" rel="noopener" hidden>☕ Support the climb</a>
     <p class="foot">Prototype. Rankings are AI-estimated, not from a real survey. Answers not on the board are ignored and cost nothing. Not affiliated with or endorsed by any brand, show, game or company named in the questions; all names belong to their owners.</p>
   </div>
 </section>
@@ -7975,6 +7981,8 @@ $('replayBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click()
     const w = document.createElement('div'); w.className = 'pwrap'; card.parentNode.insertBefore(w, card); w.appendChild(card);
     ['b'].forEach(function (k) { const c = document.createElement('i'); c.className = 'pr ' + k; c.setAttribute('aria-hidden', 'true'); w.appendChild(c); });
   }
+  const SUPPORT_URL = 'https://ko-fi.com/dailysummit'; // paste the Ko-fi page link here to switch the Support the climb button on
+  if (SUPPORT_URL) { $('supportLink').href = SUPPORT_URL; $('supportLink').hidden = false; }
   const tag = $('rowanTag'); let tagT = 0;
   function overlap(a, b) { const x = Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)), y = Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top)); return x * y; }
   function place() {
