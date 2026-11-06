@@ -10484,7 +10484,7 @@ const World = (function () {
     w.wide = iw >= 900;
     w.u = w.wide ? clamp(Math.min(ih / 800, iw * 0.52 / 592), 1, 1.7) : 1;
     w.dpr = dpr; w.W = iw / w.u; w.H = ih / w.u;
-    w.eb = w.wide ? 700 + (w.W - 700) * 0.58 : w.W * 0.74;
+    w.eb = w.wide ? 700 + (w.W - 700) * 0.685 : w.W * 0.74;
     document.documentElement.style.setProperty('--z', String(w.u));
     document.documentElement.classList.toggle('wide', w.wide);
     cv.width = Math.round(iw * dpr); cv.height = Math.round(ih * dpr);
@@ -13260,7 +13260,7 @@ $('replayBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click()
     if (!ok) { tag.hidden = true; hit.hidden = true; if (AS.mode !== 'idle') AS.mode = 'idle'; return; }
     const u = world.u || 1, p = world.pos();
     const tx = p.x * u, ty = p.y * u, cl = { left: tx - 30 * u, right: tx + 26 * u, top: ty - 76 * u, bottom: ty + 4 * u }, area = (cl.right - cl.left) * (cl.bottom - cl.top);
-    const tipX = tx - 4 * u, tipY = ty - 82 * u;
+    const tipX = tx - 20 * u, tipY = ty - 88 * u; // label anchor, a little clear of him
     const lays = [{ cls: '', lab: { left: tipX - 190, right: tipX - 8, top: tipY - 48, bottom: tipY + 52 } }, { cls: 'up', lab: [{ left: tipX - 112, right: tipX, top: tipY - 58, bottom: tipY - 12 }, { left: tipX - 40, right: tipX - 4, top: tipY + 4, bottom: tipY + 32 }] }];
     const base = tx < 60 || tx > window.innerWidth - 24 || ty < 90 || ty > window.innerHeight - 40;
     const sel = ['.intro-card', '.brand .wordmark', '.brand .kick', '.brand .sub'].map(function (q, qi) { const e = it.querySelector(q); if (!e) return null; if (qi === 0) return e.getBoundingClientRect(); const rg = document.createRange(); rg.selectNodeContents(e); return rg.getBoundingClientRect(); }).filter(Boolean); // brand lines: the text itself, not the full-width box
