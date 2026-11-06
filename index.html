@@ -982,6 +982,11 @@ html.wide #pop, html.wide #zoneBanner, html.wide #roundBanner { left: 0; right: 
 #world { filter: brightness(1.12) contrast(1.16) saturate(1.1); }
 .rtag .rt-name { text-shadow: 0 2px 0 rgba(20, 16, 30, .8), 0 0 3px rgba(20, 16, 30, .95), 0 0 14px rgba(10, 8, 24, .8); }
 .rtag .rt-arrow { filter: drop-shadow(0 2px 0 rgba(20, 16, 30, .8)) drop-shadow(0 0 4px rgba(10, 8, 24, .85)); }
+/* archive list: one row per past climb, date under the name, best score on the right */
+#archTiles { grid-template-columns: 1fr; gap: 8px; }
+#archTiles .tile { grid-template-columns: auto 1fr auto; padding: 9px 12px 9px 14px; }
+#archTiles .tile .td { display: block; grid-column: 2; }
+#archTiles .tile .tb { display: block; grid-column: 3; grid-row: 1 / 3; margin: 0; text-align: right; align-self: center; font-size: 10.5px; }
 
 </style>
 
@@ -1041,6 +1046,7 @@ html.wide #pop, html.wide #zoneBanner, html.wide #roundBanner { left: 0; right: 
     </div>
     <button id="giantBtn" class="btn gold" type="button" hidden>⚡ Storm Wraith · daily boss</button>
     <button id="unlimBtn" class="btn ghost" type="button">Unlimited · pick a route ›</button>
+    <button id="archBtn" class="btn ghost" type="button" hidden>📅 Archive · play past climbs ›</button>
     <p id="best" class="foot" hidden></p>
     <button id="howBtn" class="linkbtn" type="button">❓ How to play</button>
     <button id="ranksBtn" class="linkbtn" type="button">🏅 Ranks &amp; secret</button>
@@ -1056,6 +1062,14 @@ html.wide #pop, html.wide #zoneBanner, html.wide #roundBanner { left: 0; right: 
     <div class="tiles" id="tiles"></div>
   </div>
   <p class="foot" style="margin:0 2px">Rankings are AI-estimated, not from a real survey. Answers not on the board are ignored and cost nothing.</p>
+</section>
+
+<section id="archive" class="screen" hidden>
+  <div class="pickhead"><button id="archBack" class="btn small ghost" type="button">‹ Back</button><h2>Archive</h2></div>
+  <div class="card taped pickcard">
+    <p>Missed a day? Climb any past daily with its original seven questions. Archive runs don't touch your daily score or streak.</p>
+    <div class="tiles" id="archTiles"></div>
+  </div>
 </section>
 
 <section id="play" class="screen" hidden>
@@ -12613,7 +12627,7 @@ let PROMPTS = dailySequence(dayNumber()), S = null;
 const input = $('answerInput');
 
 function show(id) {
-  ['intro', 'pick', 'play', 'final'].forEach(function (k) { $(k).hidden = k !== id; });
+  ['intro', 'pick', 'archive', 'play', 'final'].forEach(function (k) { $(k).hidden = k !== id; });
   $('dock').hidden = id !== 'play'; if (id !== 'play') $('result').hidden = true;
   window.scrollTo(0, 0);
 }
@@ -12683,7 +12697,7 @@ function showIntro() {
   $('dayDate').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
   const st = currentStreak(), sb = $('streak');
   if (st.n > 0) { sb.textContent = '🔥 ' + st.n + '-day streak' + (st.today ? '' : ' · climb today to keep it'); sb.hidden = false; } else sb.hidden = true;
-  $('startBtn').hidden = !!done; $('doneBox').hidden = !done;
+  $('startBtn').hidden = !!done; $('doneBox').hidden = !done; $('archBtn').hidden = d < 1;
   if (done) {
     $('doneScore').textContent = fmt(done.score); const rn = $('doneRank'); rn.textContent = done.rank; rn.style.setProperty('--rk', RANK_COL[done.rank] || '#a0612a'); RankArt.fill($('doneEmb'), Math.max(0, RANKS.findIndex(function (r) { return r.name === done.rank; })));
     fillPips($('donePips'), done.grades || []);
@@ -12711,6 +12725,21 @@ function openPick() {
   show('pick');
 }
 
+function dayDate(d) { return new Date(LAUNCH + d * 86400000 + 43200000); }
+function openArchive() {
+  const box = $('archTiles'); box.innerHTML = ''; const today = dayNumber();
+  for (let d = today - 1; d >= 0; d--) (function (d) {
+    const key = 'a' + d, rb = routeBest(key), t = el('button', 'tile'); t.type = 'button'; t.style.setProperty('--tcol', '#a0612a');
+    t.appendChild(el('span', 'te', '📅')); t.appendChild(el('span', 'tn', 'Daily #' + (d + 1)));
+    t.appendChild(el('span', 'td', dayDate(d).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', timeZone: 'UTC' })));
+    t.appendChild(el('span', 'tb', rb ? 'Best ' + fmt(rb) + ' ft · ' + rankFor(rb).name : '7 questions'));
+    t.addEventListener('click', function () { Sfx.unlock(); Sfx.click(); startGame({ kind: 'archive', day: d, key: key, name: 'Daily #' + (d + 1) + ' (archive)' }); });
+    box.appendChild(t);
+  })(d);
+  clearInterval(cdT); world.snap(0); world.setTime(0.45); world.best = 0; world.setFrame(0.3, true);
+  show('archive');
+}
+
 /* ---------------- flow ---------------- */
 let howGo = null;
 function seenHow() { try { return !!localStorage.getItem('summit-howto'); } catch (e) { return false; } }
@@ -12730,7 +12759,7 @@ function startGame(mode) {
   if (!seenHow()) { openHow(function () { startGame(mode); }); return; }
   if (S) clearInterval(S.timer);
   clearInterval(cdT);
-  PROMPTS = mode.kind === 'daily' ? dailyFor(mode.day) : mode.route >= 0 ? SETS[mode.route] : randomSequence();
+  PROMPTS = mode.kind === 'archive' ? dailyFor(mode.day) : mode.kind === 'daily' ? dailyFor(mode.day) : mode.route >= 0 ? SETS[mode.route] : randomSequence();
   S = { r: 0, total: 0, rounds: [], cur: null, timer: null, deadline: 0, lastSec: 0, mode: mode };
   Stats.send('start', { k: mode.kind, m: mode.kind === 'daily' ? mode.day : (mode.key || mode.route) });
   const best = loadBest(); world.best = best ? best.score : 0;
@@ -12965,12 +12994,12 @@ function showFinal() {
   vignette('', 0); Sfx.wind(false);
   if (!S.preview && total >= SOVEREIGN_MIN && !loadGiant()) setTimeout(bossPrompt, 2300);
   const grades = S.rounds.map(gradeOf), tiles = S.rounds.map(function (r) { return r.answers.length ? r.answers.map(function (a) { return TILE_EMOJI[a.tier]; }).join('') : '⬜'; }).join(' | ');
-  const head = 'Summit 🧗 ' + (daily ? 'Daily #' + (mode.day + 1) : mode.name) + ' · ' + dateLabel(new Date()) + ' · ' + fmt(total) + ' ft · ' + RANK_EMOJI[RANKS.indexOf(rk)] + ' ' + rk.name;
+  const head = 'Summit 🧗 ' + (daily ? 'Daily #' + (mode.day + 1) : mode.name) + ' · ' + dateLabel(mode.kind === 'archive' ? dayDate(mode.day) : new Date()) + ' · ' + fmt(total) + ' ft · ' + RANK_EMOJI[RANKS.indexOf(rk)] + ' ' + rk.name;
   let streakN = 0;
   if (daily) { streakN = bumpStreak(mode.day); jset('summit-daily', { day: mode.day, rev: DAILY_REV, score: total, rank: rk.name, grades: grades, rounds: S.rounds.map(function (r) { return { s: r.p.short, pts: r.points, bust: !!r.bust, lost: r.lost || 0, fin: !!r.final, a: r.answers.map(function (a) { return [a.name, a.tier, a.mult, a.pts]; }) }; }), share: head + (streakN > 1 ? ' · 🔥' + streakN : '') + '\n' + tiles }); }
   else if (!S.preview) saveRouteBest(mode.key, total);
   $('finalKick').textContent = (daily ? 'Daily #' + (mode.day + 1) + (streakN > 1 ? ' · 🔥 ' + streakN + '-day streak' : '') : mode.name) + (prev && isNew ? ' · new personal best!' : '');
-  $('nextRoute').textContent = daily ? 'Play unlimited' : 'Choose another route';
+  $('nextRoute').textContent = daily ? 'Play unlimited' : mode.kind === 'archive' ? 'Back to archive' : 'Choose another route';
   $('rankName').textContent = rk.name; $('rankName').parentNode.style.setProperty('--rk', RANK_COL[rk.name]);
   const ri0 = RANKS.indexOf(rk);
   RankArt.fill($('rankEmb'), ri0, 'pop'); $('sumCard').className = 'card taped' + (ri0 >= 4 ? ' hi t' + ri0 : '');
@@ -13180,15 +13209,17 @@ function closeExit(resume) {
   }
 }
 function leaveRun() {
-  const daily = S.mode.kind === 'daily';
+  const daily = S.mode.kind === 'daily', arch = S.mode.kind === 'archive';
   $('exitSheet').hidden = true; clearInterval(S.timer); vignette('', 0); Sfx.wind(false); $('result').hidden = true;
-  S = null; if (daily) showIntro(); else openPick();
+  S = null; if (daily) showIntro(); else if (arch) openArchive(); else openPick();
 }
 
 /* ---------------- events ---------------- */
 $('startBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click(); startGame(); });
 $('unlimBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click(); openPick(); });
 $('pickBack').addEventListener('click', function () { Sfx.click(); showIntro(); });
+$('archBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click(); openArchive(); });
+$('archBack').addEventListener('click', function () { Sfx.click(); showIntro(); });
 $('homeBtn').addEventListener('click', function () { Sfx.click(); showIntro(); });
 function openResults() {
   const d = loadDaily(); if (!d) return;
@@ -13229,7 +13260,7 @@ $('exitBtn').addEventListener('click', function () { Sfx.click(); openExit(); })
 $('exitStay').addEventListener('click', function () { Sfx.click(); closeExit(true); });
 $('exitGo').addEventListener('click', function () { Sfx.click(); leaveRun(); });
 $('exitSheet').addEventListener('click', function (e) { if (e.target === $('exitSheet')) closeExit(true); });
-$('nextRoute').addEventListener('click', function () { Sfx.unlock(); Sfx.click(); openPick(); });
+$('nextRoute').addEventListener('click', function () { Sfx.unlock(); Sfx.click(); if (S && S.mode && S.mode.kind === 'archive') openArchive(); else openPick(); });
 $('reviewBtn').addEventListener('click', function () { Sfx.click(); openReview(); });
 $('revBack').addEventListener('click', function () { Sfx.click(); $('revView').hidden = true; $('sumView').hidden = false; window.scrollTo(0, 0); });
 $('bankBtn').addEventListener('click', function () { if (S && S.cur && S.cur.safe > 0) endRound('bank'); });
