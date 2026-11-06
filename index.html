@@ -12570,6 +12570,29 @@ function loadBest() { try { const v = JSON.parse(localStorage.getItem('summit-be
 function saveBest(score) { try { localStorage.setItem('summit-best', JSON.stringify({ score: score })); } catch (e) { /* ignore */ } }
 function jget(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
 function jset(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* ignore */ } }
+
+/* Question picking: the daily climb and every boss fight draw fresh random questions from the whole pool.
+   A day's questions are remembered so a reload keeps the same climb, and the daily and the bosses never share a question. */
+const ROUTE_OF = (function () { const m = {}; SETS.forEach(function (s, i) { s.forEach(function (p) { m[p.id] = i; }); }); return m; })();
+function usedToday() { const v = jget('summit-used'), d = dayNumber(); return v && v.day === d ? { day: d, daily: v.daily || [], boss: v.boss || [] } : { day: d, daily: [], boss: [] }; }
+function pickRandom(n, banned, perRoute) {
+  const order = shuffleIdx(ALL.length, (Math.random() * 4294967295) | 0), out = [], cnt = {};
+  for (let pass = 0; pass < 2 && out.length < n; pass++) {
+    for (let i = 0; i < order.length && out.length < n; i++) {
+      const p = ALL[order[i]], r = ROUTE_OF[p.id];
+      if (banned[p.id] || out.indexOf(p) >= 0 || (pass === 0 && (cnt[r] || 0) >= perRoute)) continue;
+      out.push(p); cnt[r] = (cnt[r] || 0) + 1;
+    }
+  }
+  return out;
+}
+function todaysDaily() {
+  const u = usedToday();
+  if (u.daily.length === PER_DAY) { const out = u.daily.map(function (id) { return ALL.filter(function (p) { return p.id === id; })[0]; }); if (out.every(Boolean)) return out; }
+  const banned = {}; u.boss.forEach(function (id) { banned[id] = 1; });
+  const out = pickRandom(PER_DAY, banned, 2); u.daily = out.map(function (p) { return p.id; }); jset('summit-used', u);
+  return out;
+}
 const DAILY_REV = 7; // bump to reshuffle the schedule and let today be played again
 function loadDaily() { const v = jget('summit-daily'); return v && v.day === dayNumber() && v.rev === DAILY_REV && typeof v.score === 'number' ? v : null; }
 function currentStreak() { const s = jget('summit-streak'); if (!s) return { n: 0, today: false }; const d = dayNumber(); return s.last === d ? { n: s.n, today: true } : s.last === d - 1 ? { n: s.n, today: false } : { n: 0, today: false }; }
@@ -12699,7 +12722,7 @@ function startGame(mode) {
   if (!seenHow()) { openHow(function () { startGame(mode); }); return; }
   if (S) clearInterval(S.timer);
   clearInterval(cdT);
-  PROMPTS = mode.kind === 'daily' ? dailySequence(mode.day) : mode.route >= 0 ? SETS[mode.route] : randomSequence();
+  PROMPTS = mode.kind === 'daily' ? todaysDaily() : mode.route >= 0 ? SETS[mode.route] : randomSequence();
   S = { r: 0, total: 0, rounds: [], cur: null, timer: null, deadline: 0, lastSec: 0, mode: mode };
   Stats.send('start', { k: mode.kind, m: mode.kind === 'daily' ? mode.day : (mode.key || mode.route) });
   const best = loadBest(); world.best = best ? best.score : 0;
@@ -13357,10 +13380,10 @@ const GTIME = { 10: 2, 25: 3, 50: 5, 100: 8 }; // seconds added to the clock per
 let G = null, gSayT = 0, gCd = 0;
 
 function loadGiant() { const v = jget('summit-giant'); return v && v.day === dayNumber() ? v : null; }
-function giantPrompts(day) { // three prompts a day, never the ones in today's regular climb
-  const used = {}; dailySequence(day).forEach(function (p) { used[p.id] = 1; });
-  const order = shuffleIdx(ALL.length, 70001 + day * 7919), out = [];
-  for (let i = 0; i < order.length && out.length < 3; i++) { const p = ALL[order[i]]; if (!used[p.id]) out.push(p); }
+function giantPrompts(day) { // three fresh random prompts every fight, never ones from today's daily climb
+  const u = usedToday(), banned = {}; (u.daily.length ? u.daily : dailySequence(day).map(function (p) { return p.id; })).forEach(function (id) { banned[id] = 1; });
+  const out = pickRandom(3, banned, 1);
+  u.boss = u.boss.concat(out.map(function (p) { return p.id; })).filter(function (id, i, a) { return a.indexOf(id) === i; }); jset('summit-used', u);
   return out;
 }
 function giantSync() { // the start screen button
