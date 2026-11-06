@@ -12575,12 +12575,13 @@ function jset(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch 
    from the day number, one per route at most, never repeating any question from the previous 5 days. Every boss fight
    draws 3 fresh random questions that are never in today's daily climb. */
 const ROUTE_OF = (function () { const m = {}; SETS.forEach(function (s, i) { s.forEach(function (p) { m[p.id] = i; }); }); return m; })();
-const DAILY_START = 4, DCACHE = {};
+const DAILY_START = 3, DCACHE = {};
 function dailyFor(day) {
   day = Math.max(0, day | 0);
   if (day < DAILY_START) return dailySequence(day);
   if (DCACHE[day]) return DCACHE[day];
   const banned = {}; for (let d = Math.max(0, day - 5); d < day; d++) dailyFor(d).forEach(function (p) { banned[p.id] = 1; });
+  if (day === DAILY_START) dailySequence(day).forEach(function (p) { banned[p.id] = 1; }); // the set that was already played on the launch schedule is retired
   const order = shuffleIdx(ALL.length, 90210 + day * 7919), out = [], cnt = {};
   for (let pass = 0; pass < 2 && out.length < PER_DAY; pass++) {
     for (let i = 0; i < order.length && out.length < PER_DAY; i++) {
@@ -12602,7 +12603,7 @@ function pickRandom(n, banned, perRoute) {
   }
   return out;
 }
-const DAILY_REV = 7; // bump to reshuffle the schedule and let today be played again
+const DAILY_REV = 8; // bump to reshuffle the schedule and let today be played again
 function loadDaily() { const v = jget('summit-daily'); return v && v.day === dayNumber() && v.rev === DAILY_REV && typeof v.score === 'number' ? v : null; }
 function currentStreak() { const s = jget('summit-streak'); if (!s) return { n: 0, today: false }; const d = dayNumber(); return s.last === d ? { n: s.n, today: true } : s.last === d - 1 ? { n: s.n, today: false } : { n: 0, today: false }; }
 function bumpStreak(day) { const s = jget('summit-streak') || { last: -99, n: 0 }; if (s.last === day) return s.n; const n = s.last === day - 1 ? s.n + 1 : 1; jset('summit-streak', { last: day, n: n }); return n; }
