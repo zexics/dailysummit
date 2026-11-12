@@ -997,6 +997,53 @@ html.wide #pop, html.wide #zoneBanner, html.wide #roundBanner { left: 0; right: 
 .pex { display: block; margin-top: 7px; font: italic 600 13px/1.3 var(--sans, system-ui, sans-serif); letter-spacing: 0; opacity: .72; }
 #status.sug span, #gStatus.sug span { color: #5a3d05; border-color: #c98a1b; background: #fff1cc; cursor: pointer; }
 #status.sug span b { color: #8a4b00; }
+/* social */
+  .chbanner { margin: 0 0 10px; padding: 10px 12px; background: var(--paper3); border: 2px solid var(--ink); border-radius: 4px; font: 700 13.5px/1.4 var(--sans); color: var(--ink); text-align: left; box-shadow: 0 2px 0 rgba(43, 34, 24, .3); }
+  .chbanner b { color: var(--red); }
+  .chbanner small { display: block; margin-top: 3px; font: 600 12px/1.35 var(--sans); color: var(--sepia); }
+  .chcmp { margin: 10px 0 0; padding: 8px 10px; border: 2px dashed var(--ink); border-radius: 4px; font: 800 13px/1.35 var(--sans); text-align: center; background: var(--paper3); color: var(--ink); }
+  .chcmp.win { border-color: var(--green); color: var(--green); }
+  .chcmp.lose { border-color: var(--red); color: var(--red); }
+  .brag { margin: 10px 0 2px; padding: 10px 12px; background: var(--paper3); border: 2px solid var(--ink); border-radius: 4px; text-align: left; box-shadow: 0 2px 0 rgba(43, 34, 24, .3); }
+  .brag .bt { font: 800 14px/1.3 var(--sans); color: var(--ink); }
+  .brag .bs { margin: 3px 0 8px; font: 600 12.5px/1.4 var(--sans); color: var(--sepia); }
+  .myname { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0 0; font: 700 12.5px var(--sans); color: var(--sepia); }
+  .myname label { flex: 1 0 100%; }
+  .myname input { flex: 1 1 140px; }
+  .myname input, .sheet input.sin { flex: 1; min-width: 0; font: 600 15px var(--sans); color: var(--ink); background: var(--paper3); border: 2px solid var(--ink); border-radius: 4px; padding: 9px 10px; outline: none; }
+  .sheet input.sin { width: 100%; box-sizing: border-box; margin: 4px 0 8px; }
+  .sheet input.code { text-transform: uppercase; letter-spacing: .3em; font-weight: 800; text-align: center; }
+  .rng-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 4px 0 10px; }
+  .rng-top div { background: var(--paper3); border: 2px solid var(--ink); border-radius: 4px; padding: 8px 4px; text-align: center; font: 600 11.5px/1.3 var(--sans); color: var(--sepia); }
+  .rng-top b { display: block; font: 800 22px var(--sans); color: var(--ink); }
+  .rng-map { width: 100%; height: auto; display: block; background: var(--paper3); border: 2px solid var(--ink); border-radius: 4px; }
+  .rng-ms { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+  .rng-ms span { font: 700 12px var(--sans); padding: 5px 8px; border: 2px solid var(--ink); border-radius: 3px; background: var(--paper3); }
+  .rng-ms span.lock { opacity: .45; border-style: dashed; }
+  .rng-next { font: 700 13px/1.4 var(--sans); color: var(--ink); margin: 0 0 4px; }
+  .rm-sec { margin: 0 0 14px; }
+  .rm-sec h4 { margin: 0 0 2px; font: 800 12px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--sepia); }
+  .rm-msg { min-height: 18px; font: 700 12.5px var(--sans); color: var(--red); margin: 0 0 6px; }
+  .rm-code { font: 800 30px/1 ui-monospace, Menlo, Consolas, monospace; letter-spacing: .25em; color: var(--ink); margin: 2px 0 8px; }
+  .rm-row { display: grid; grid-template-columns: 26px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; background: var(--paper3); border: 2px solid var(--ink); border-radius: 4px; margin: 0 0 6px; font: 700 14px var(--sans); color: var(--ink); }
+  .rm-row.me { background: var(--paper2); border-color: var(--red); }
+  .rm-row small { display: block; font: 600 11px var(--sans); color: var(--sepia); }
+  .rm-row .ft { font: 800 15px var(--sans); }
+  .rm-tabs { display: flex; gap: 8px; margin: 0 0 8px; }
+  .rm-tabs button { flex: 1; }
+  .rm-tabs button.on { background: var(--ink); color: var(--paper); }
+  .rm-act { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; }
+  .rm-act .btn { flex: 1 1 140px; }
+  .rm-tip { font: 600 12px/1.45 var(--sans); color: var(--sepia); margin: 8px 0 0; }
+  body.board { background: transparent !important; }
+  body.board > *:not(#boardView):not(script) { display: none !important; }
+  #boardView { display: none; }
+  body.board #boardView { display: block; padding: 18px; max-width: 760px; margin: 0 auto; font-family: var(--sans); color: #fff; text-shadow: 0 2px 6px rgba(0, 0, 0, .7); }
+  #boardView h1 { margin: 0; font: 800 clamp(22px, 5vw, 38px)/1.1 var(--sans); }
+  #boardView .bsub { font: 700 clamp(14px, 2.6vw, 20px) var(--sans); opacity: .95; margin: 4px 0 14px; }
+  #boardView .brow { display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: center; padding: 10px 14px; margin: 0 0 8px; border-radius: 8px; background: rgba(20, 14, 8, .72); font: 800 clamp(18px, 3.6vw, 28px) var(--sans); }
+  #boardView .brow:first-of-type { background: rgba(184, 55, 43, .82); }
+  #boardView .brow small { font: 700 clamp(11px, 2vw, 15px) var(--sans); opacity: .85; display: block; }
 
 </style>
 
@@ -1044,6 +1091,7 @@ html.wide #pop, html.wide #zoneBanner, html.wide #roundBanner { left: 0; right: 
       </dl>
     </details>
     <div class="route"><div class="daylbl"><b id="dayName">Daily #1</b><span id="dayDate"></span></div><button id="sfxBtn" class="sfxb" type="button" aria-pressed="true">Sound on</button></div>
+    <div id="chBanner" class="chbanner" hidden></div>
     <div id="streak" class="streak" hidden></div>
     <button id="startBtn" class="btn red" type="button">Start today's climb</button>
     <div id="doneBox" class="done" hidden>
@@ -1052,15 +1100,19 @@ html.wide #pop, html.wide #zoneBanner, html.wide #roundBanner { left: 0; right: 
       <div id="donePips" class="pips mini" aria-label="Round results"></div>
       <div class="nx">Next climb in <b id="nextIn">--:--:--</b></div>
       <button id="doneView" class="btn gold" type="button" style="margin-bottom:8px">See your results</button>
-      <div class="dacts"><button id="doneCopy" class="btn ghost sm2" type="button">Copy result</button><button id="doneNotes" class="btn ghost sm2" type="button" hidden>Field notes</button></div>
+      <div class="dacts"><button id="doneCopy" class="btn ghost sm2" type="button">Share result</button><button id="doneNotes" class="btn ghost sm2" type="button" hidden>Field notes</button></div>
     </div>
     <button id="giantBtn" class="btn gold" type="button" hidden>⚡ Storm Wraith · daily boss</button>
+    <button id="roomBtn" class="btn ghost" type="button" hidden>👥 Summit with friends</button>
     <button id="unlimBtn" class="btn ghost" type="button">Unlimited · pick a route ›</button>
     <button id="archBtn" class="btn ghost" type="button" hidden>📅 Archive · play past climbs ›</button>
     <p id="best" class="foot" hidden></p>
     <button id="howBtn" class="linkbtn" type="button">❓ How to play</button>
+    <button id="rangeBtn" class="linkbtn" type="button">🏔 Your range &amp; streak</button>
+    <button id="demoChal" class="linkbtn" type="button" hidden>⚔ Preview: a friend's challenge</button>
     <button id="ranksBtn" class="linkbtn" type="button">🏅 Ranks &amp; secret</button>
     <button id="replayBtn" class="linkbtn" type="button">▶ Replay intro</button>
+    <a id="aboutLink" class="linkbtn" href="https://dailysummit.io/about.html" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none">ℹ️ About, credits &amp; privacy</a>
     <a id="supportLink" class="supportlink" href="#" target="_blank" rel="noopener" hidden>☕ Support the climb</a>
   </div>
 </section>
@@ -1150,16 +1202,19 @@ html.wide #pop, html.wide #zoneBanner, html.wide #roundBanner { left: 0; right: 
       <div id="rankFlair" class="flair" hidden></div>
       <div class="pbar"><i id="rankBar"></i></div>
       <div id="finalPips" class="pips big" aria-label="Round results"></div>
+      <div id="chCmp" class="chcmp" hidden></div>
     </div>
     <div id="secretNote" class="secretnote" hidden><b>🗝 Secret unlocked</b><span>You took the throne. The Storm Wraith, a daily boss, is waiting for you.</span><button id="secretGo" class="btn gold" type="button" style="margin-top:8px">⚡ Fight the Storm Wraith</button></div>
     <p class="hint">Tap a round to browse its rarest answers.</p>
     <div id="rows"></div>
     <div class="acts">
       <button id="nextRoute" class="btn red" type="button">Play unlimited</button>
-      <button id="shareBtn" class="btn ghost" type="button">Copy result</button>
+      <button id="shareBtn" class="btn ghost" type="button">Share result</button>
       <button id="reviewBtn" class="btn" type="button">Field notes</button>
     </div>
     <textarea id="shareText" class="share" rows="3" readonly aria-label="Result text" style="margin-top:10px"></textarea>
+    <button id="nameToggle" class="linkbtn" type="button" style="margin-top:8px">+ Add your name to the link</button>
+    <div id="nameBox" class="myname" hidden><label for="myName">Name shown to your friend</label><input id="myName" maxlength="16" placeholder="Optional" autocomplete="off"></div>
     <button id="homeBtn" class="linkbtn" type="button" style="display:block;margin:10px auto 0">Back to start</button>
   </div>
   <div id="revView" hidden>
@@ -1168,6 +1223,19 @@ html.wide #pop, html.wide #zoneBanner, html.wide #roundBanner { left: 0; right: 
   </div>
 </section>
 
+<div id="rangeSheet" class="scrim" hidden>
+  <div class="sheet card taped" role="dialog" aria-modal="true" aria-labelledby="rangeT" style="max-width:460px">
+    <div class="rh"><div><div class="k">Your daily habit</div><h3 id="rangeT">Your range</h3></div><button id="rangeClose" class="xbtn" type="button" aria-label="Close">✕</button></div>
+    <div id="rangeBody" class="rkscroll"></div>
+  </div>
+</div>
+<div id="roomSheet" class="scrim" hidden>
+  <div class="sheet card taped" role="dialog" aria-modal="true" aria-labelledby="roomT" style="max-width:460px">
+    <div class="rh"><div><div class="k">No signup needed</div><h3 id="roomT">Summit with friends</h3></div><button id="roomClose" class="xbtn" type="button" aria-label="Close">✕</button></div>
+    <div id="roomBody" class="rkscroll"></div>
+  </div>
+</div>
+<div id="boardView" aria-live="polite"></div>
 <div id="ranksSheet" class="scrim" hidden>
   <div class="sheet card taped" role="dialog" aria-modal="true" aria-labelledby="ranksT" style="max-width:460px">
     <div class="rh"><div><div class="k">The ladder</div><h3 id="ranksT">Ranks</h3><div id="ranksBest" class="rbest"></div></div><button id="ranksClose" class="xbtn" type="button" aria-label="Close">✕</button></div>
@@ -10338,7 +10406,7 @@ function osa(a, b) {
 
 
 /* Country / territory words. A typed answer may leave them out ("pound" for British pound) and get a "Did you mean" suggestion. */
-const GEO_T = new RegExp('(?:^| )(?:united arab emirates|dominican republic|northern ireland|middle eastern|united kingdom|latin american|czech republic|mediterranean|great britain|united states|south african|scandinavian|south africa|saudi arabia|netherlands|singaporean|north korea|argentinian|new zealand|switzerland|afghanistan|puerto rico|el salvador|south korea|bangladeshi|philippines|uzbekistan|costa rica|bangladesh|kazakhstan|portuguese|azerbaijan|vietnamese|australian|luxembourg|indonesian|philippine|greenland|taiwanese|cambodian|ukrainian|hong kong|caribbean|colombian|sri lanka|malaysian|venezuela|icelandic|argentina|brazilian|lithuania|argentine|bulgarian|indonesia|pakistani|nicaragua|australia|hungarian|singapore|ethiopian|mongolian|norwegian|guatemala|ethiopia|colombia|slovenia|thailand|nigerian|paraguay|scotland|malaysia|jamaican|hawaiian|romanian|mongolia|austrian|bulgaria|canadian|zimbabwe|slovakia|portugal|japanese|botswana|tanzania|honduras|nepalese|pakistan|scottish|cambodia|lebanese|egyptian|peruvian|filipino|american|european|croatian|moroccan|cameroon|england|swedish|britain|armenia|hungary|belgian|ukraine|bolivia|israeli|nigeria|estonia|chinese|jamaica|america|russian|denmark|italian|bahrain|somalia|tunisia|british|uruguay|english|finnish|austria|vietnam|spanish|algeria|albania|germany|iceland|holland|chilean|haitian|croatia|romania|bahamas|ireland|mexican|finland|serbian|turkish|belgium|czechia|belarus|morocco|tibetan|ecuador|iranian|senegal|african|lebanon|myanmar|greece|indian|israel|serbia|russia|canada|rwanda|korean|brazil|kazakh|nordic|france|brunei|polish|norway|syrian|french|kenyan|poland|kuwait|mexico|taiwan|german|cyprus|danish|latvia|panama|bosnia|zambia|sweden|cuban|italy|greek|spain|egypt|dutch|nepal|india|yemen|chile|irish|china|u s a|libya|asian|japan|wales|kenya|macau|ghana|swiss|tibet|czech|saudi|haiti|iraqi|sudan|syria|korea|qatar|welsh|thai|arab|peru|fiji|iraq|guam|cuba|iran|oman|usa|uae|uk)(?= |$)'), GEO_G = new RegExp('(?:^| )(?:united arab emirates|dominican republic|northern ireland|middle eastern|united kingdom|latin american|czech republic|mediterranean|great britain|united states|south african|scandinavian|south africa|saudi arabia|netherlands|singaporean|north korea|argentinian|new zealand|switzerland|afghanistan|puerto rico|el salvador|south korea|bangladeshi|philippines|uzbekistan|costa rica|bangladesh|kazakhstan|portuguese|azerbaijan|vietnamese|australian|luxembourg|indonesian|philippine|greenland|taiwanese|cambodian|ukrainian|hong kong|caribbean|colombian|sri lanka|malaysian|venezuela|icelandic|argentina|brazilian|lithuania|argentine|bulgarian|indonesia|pakistani|nicaragua|australia|hungarian|singapore|ethiopian|mongolian|norwegian|guatemala|ethiopia|colombia|slovenia|thailand|nigerian|paraguay|scotland|malaysia|jamaican|hawaiian|romanian|mongolia|austrian|bulgaria|canadian|zimbabwe|slovakia|portugal|japanese|botswana|tanzania|honduras|nepalese|pakistan|scottish|cambodia|lebanese|egyptian|peruvian|filipino|american|european|croatian|moroccan|cameroon|england|swedish|britain|armenia|hungary|belgian|ukraine|bolivia|israeli|nigeria|estonia|chinese|jamaica|america|russian|denmark|italian|bahrain|somalia|tunisia|british|uruguay|english|finnish|austria|vietnam|spanish|algeria|albania|germany|iceland|holland|chilean|haitian|croatia|romania|bahamas|ireland|mexican|finland|serbian|turkish|belgium|czechia|belarus|morocco|tibetan|ecuador|iranian|senegal|african|lebanon|myanmar|greece|indian|israel|serbia|russia|canada|rwanda|korean|brazil|kazakh|nordic|france|brunei|polish|norway|syrian|french|kenyan|poland|kuwait|mexico|taiwan|german|cyprus|danish|latvia|panama|bosnia|zambia|sweden|cuban|italy|greek|spain|egypt|dutch|nepal|india|yemen|chile|irish|china|u s a|libya|asian|japan|wales|kenya|macau|ghana|swiss|tibet|czech|saudi|haiti|iraqi|sudan|syria|korea|qatar|welsh|thai|arab|peru|fiji|iraq|guam|cuba|iran|oman|usa|uae|uk)(?= |$)', 'g');
+const GEO_T = new RegExp('(?:^| )(?:united arab emirates|dominican republic|northern ireland|middle eastern|czech republic|united kingdom|latin american|united states|mediterranean|south african|great britain|scandinavian|saudi arabia|south africa|singaporean|el salvador|netherlands|afghanistan|bangladeshi|north korea|puerto rico|argentinian|south korea|new zealand|philippines|switzerland|indonesian|philippine|portuguese|uzbekistan|luxembourg|bangladesh|azerbaijan|australian|kazakhstan|costa rica|vietnamese|taiwanese|pakistani|ethiopian|sri lanka|hong kong|cambodian|lithuania|australia|argentine|bulgarian|malaysian|indonesia|icelandic|argentina|ukrainian|nicaragua|hungarian|colombian|guatemala|mongolian|norwegian|brazilian|caribbean|greenland|venezuela|singapore|romanian|american|slovenia|ethiopia|bulgaria|filipino|jamaican|croatian|nepalese|scottish|zimbabwe|malaysia|scotland|european|egyptian|honduras|canadian|japanese|paraguay|pakistan|cameroon|thailand|mongolia|hawaiian|lebanese|portugal|tanzania|botswana|moroccan|nigerian|cambodia|slovakia|peruvian|colombia|austrian|algeria|italian|iranian|austria|nigeria|russian|armenia|mexican|germany|senegal|ukraine|bahrain|spanish|england|belgian|tibetan|somalia|czechia|finland|ecuador|lebanon|albania|african|romania|ireland|morocco|uruguay|tunisia|belarus|britain|finnish|vietnam|haitian|bolivia|iceland|swedish|hungary|america|israeli|croatia|myanmar|bahamas|turkish|estonia|holland|denmark|chilean|chinese|jamaica|belgium|british|english|serbian|kenyan|danish|brunei|norway|mexico|poland|israel|brazil|bosnia|serbia|kazakh|cyprus|korean|sweden|german|russia|greece|indian|syrian|latvia|canada|polish|taiwan|france|french|rwanda|panama|nordic|kuwait|zambia|egypt|cuban|iraqi|welsh|irish|sudan|libya|swiss|asian|saudi|qatar|kenya|china|macau|spain|greek|ghana|italy|nepal|korea|syria|india|yemen|haiti|wales|chile|dutch|czech|u s a|tibet|japan|iran|arab|thai|fiji|iraq|guam|peru|oman|cuba|uae|usa|uk)(?= |$)'), GEO_G = new RegExp('(?:^| )(?:united arab emirates|dominican republic|northern ireland|middle eastern|czech republic|united kingdom|latin american|united states|mediterranean|south african|great britain|scandinavian|saudi arabia|south africa|singaporean|el salvador|netherlands|afghanistan|bangladeshi|north korea|puerto rico|argentinian|south korea|new zealand|philippines|switzerland|indonesian|philippine|portuguese|uzbekistan|luxembourg|bangladesh|azerbaijan|australian|kazakhstan|costa rica|vietnamese|taiwanese|pakistani|ethiopian|sri lanka|hong kong|cambodian|lithuania|australia|argentine|bulgarian|malaysian|indonesia|icelandic|argentina|ukrainian|nicaragua|hungarian|colombian|guatemala|mongolian|norwegian|brazilian|caribbean|greenland|venezuela|singapore|romanian|american|slovenia|ethiopia|bulgaria|filipino|jamaican|croatian|nepalese|scottish|zimbabwe|malaysia|scotland|european|egyptian|honduras|canadian|japanese|paraguay|pakistan|cameroon|thailand|mongolia|hawaiian|lebanese|portugal|tanzania|botswana|moroccan|nigerian|cambodia|slovakia|peruvian|colombia|austrian|algeria|italian|iranian|austria|nigeria|russian|armenia|mexican|germany|senegal|ukraine|bahrain|spanish|england|belgian|tibetan|somalia|czechia|finland|ecuador|lebanon|albania|african|romania|ireland|morocco|uruguay|tunisia|belarus|britain|finnish|vietnam|haitian|bolivia|iceland|swedish|hungary|america|israeli|croatia|myanmar|bahamas|turkish|estonia|holland|denmark|chilean|chinese|jamaica|belgium|british|english|serbian|kenyan|danish|brunei|norway|mexico|poland|israel|brazil|bosnia|serbia|kazakh|cyprus|korean|sweden|german|russia|greece|indian|syrian|latvia|canada|polish|taiwan|france|french|rwanda|panama|nordic|kuwait|zambia|egypt|cuban|iraqi|welsh|irish|sudan|libya|swiss|asian|saudi|qatar|kenya|china|macau|spain|greek|ghana|italy|nepal|korea|syria|india|yemen|haiti|wales|chile|dutch|czech|u s a|tibet|japan|iran|arab|thai|fiji|iraq|guam|peru|oman|cuba|uae|usa|uk)(?= |$)', 'g');
 const GEO_GENERIC = /^(?:city|cities|island|islands|republic|state|states|kingdom|river|lake|mount|mountain|mountains|sea|ocean|bay|gulf|north|south|east|west|new|great|united|national|international|empire|union|capital|area|region|province|territory|party|day|open|games|league)$/;
 function stripGeo(nm) {
   const n = norm(nm);
@@ -12732,8 +12800,8 @@ function setPromptText(el, t) {
 }
 const DAILY_REV = 8; // bump to reshuffle the schedule and let today be played again
 function loadDaily() { const v = jget('summit-daily'); return v && v.day === dayNumber() && v.rev === DAILY_REV && typeof v.score === 'number' ? v : null; }
-function currentStreak() { const s = jget('summit-streak'); if (!s) return { n: 0, today: false }; const d = dayNumber(); return s.last === d ? { n: s.n, today: true } : s.last === d - 1 ? { n: s.n, today: false } : { n: 0, today: false }; }
-function bumpStreak(day) { const s = jget('summit-streak') || { last: -99, n: 0 }; if (s.last === day) return s.n; const n = s.last === day - 1 ? s.n + 1 : 1; jset('summit-streak', { last: day, n: n }); return n; }
+function currentStreak() { const s = jget('summit-streak'); if (!s) return { n: 0, today: false }; const d = dayNumber(); return s.last === d ? { n: s.n, today: true } : s.last === d - 1 ? { n: s.n, today: false } : (s.last === d - 2 && (s.frz | 0) > 0) ? { n: s.n, today: false, frz: true } : { n: 0, today: false }; }
+function bumpStreak(day) { const s = jget('summit-streak') || { last: -99, n: 0 }; if (s.last === day) return s.n; let frz = s.frz | 0, n; if (s.last === day - 1) n = s.n + 1; else if (s.last === day - 2 && frz > 0) { n = s.n + 1; frz--; } else n = 1; if (n % 7 === 0 && frz < 2) frz++; jset('summit-streak', { last: day, n: n, best: Math.max(s.best | 0, s.n | 0, n), frz: frz }); return n; }
 function routeBest(key) { const v = jget('summit-rbest'); return v && typeof v[key] === 'number' ? v[key] : 0; }
 function saveRouteBest(key, score) { const v = jget('summit-rbest') || {}; if (!(score > (v[key] || 0))) return; v[key] = score; jset('summit-rbest', v); }
 function dateLabel(d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
@@ -12828,6 +12896,7 @@ function showIntro() {
   clearInterval(cdT); cdT = setInterval(tickCountdown, 1000); tickCountdown();
   world.snap(0); world.setTime(0.45); world.best = 0; world.setFrame(0.3, true);
   giantSync();
+  Social.intro();
   show('intro');
 }
 function openPick() {
@@ -13107,7 +13176,7 @@ function renderResult(reason) {
   const cr = el('div', 'crowd'); cr.appendChild(el('h4', '', 'Most common answers'));
   const ch = el('div', 'chips');
   r.p.idx.groups.filter(function (x) { return x.tier === 0; }).sort(function (a, b2) { return a.rank - b2.rank; }).forEach(function (x) { ch.appendChild(el('span', 'cr' + (x.rank <= r.tc ? ' trip' : ''), x.name)); });
-  cr.appendChild(ch); b.appendChild(cr);
+  cr.appendChild(ch); b.appendChild(cr); Social.brag(b, r);
   const nb = el('button', 'btn ' + (r.bust ? '' : 'gold'), S.r === TOTAL - 1 ? 'See final rank' : 'Round ' + (S.r + 2) + ' →'); nb.type = 'button'; nb.id = 'nextBtn';
   nb.appendChild(el('kbd', '', 'Enter ↵'));
   nb.addEventListener('click', function () { Sfx.click(); nextRound(); });
@@ -13151,11 +13220,11 @@ function showFinal() {
     const gr = el('div', 'gr'); gr.appendChild(el('span', 'stamp', GRADES[g].i + ' ' + GRADES[g].n)); gr.appendChild(el('b', '', r.bust ? (r.lost ? '−' + fmt(r.lost) : '0') : '+' + fmt(r.points)));
     row.appendChild(gr); rows.appendChild(row);
   });
-  $('shareText').value = head + (streakN > 1 ? ' · 🔥' + streakN : '') + '\n' + tiles;
+  Social.finalShare(head + (streakN > 1 ? ' · 🔥' + streakN : '') + '\n' + tiles, daily, total, grades, rk, mode); Social.afterFinal(daily, mode, total, grades, rk);
   const fp = $('finalPips'); fp.innerHTML = ''; const fpips = [];
   for (let i = 0; i < TOTAL; i++) { const p = pipEl(''); fp.appendChild(p); fpips.push(p); }
   grades.forEach(function (gr, i) { setTimeout(function () { fpips[i].className = 'pip g-' + gr + ' fresh'; setTimeout(function () { fpips[i].classList.remove('fresh'); }, 900); }, 700 + i * 170); });
-  $('shareBtn').textContent = 'Copy result';
+  $('shareBtn').textContent = 'Share result';
   let cum = 0; const camps = []; S.rounds.forEach(function (r) { if (!r.bust && r.points > 0) { cum += r.points; camps.push(cum); } });
   world.labels = false; world.snap(0); world.setTime(1); world.best = prev ? prev.score : 0; world.camps = camps; world.banked = total; world.setFrame(0.3, true);
   $('sumView').hidden = false; $('revView').hidden = true; show('final');
@@ -13379,7 +13448,7 @@ $('resSheet').addEventListener('click', function (e) { if (e.target === this) cl
 $('resCopy').addEventListener('click', function () { const d = loadDaily(); if (d) copyText(d.share || '', $('resCopy'), 'Copy result'); });
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('resSheet').hidden) { e.preventDefault(); closeResults(); } });
 $('doneNotes').addEventListener('click', function () { Sfx.click(); $('sumView').hidden = true; $('revView').hidden = false; show('final'); openReview(); });
-$('doneCopy').addEventListener('click', function () { const d = loadDaily(); if (d) copyText(d.share || '', $('doneCopy'), 'Copy result'); });
+$('doneCopy').addEventListener('click', function () { const d = loadDaily(); if (d) Social.share(d.share || '', $('doneCopy'), 'Share result'); });
 $('rareClose').addEventListener('click', function () { Sfx.click(); closeRare(); });
 $('rare').addEventListener('click', function (e) { if (e.target === $('rare')) closeRare(); });
 $('rareSearch').addEventListener('input', renderRare);
@@ -13420,7 +13489,7 @@ function copyText(text, btn, label) {
   };
   if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(fb); else fb();
 }
-$('shareBtn').addEventListener('click', function () { copyText($('shareText').value, $('shareBtn'), 'Copy result'); });
+$('shareBtn').addEventListener('click', function () { Social.share($('shareText').value, $('shareBtn'), 'Share result'); });
 syncSfxButtons();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { world.fit(); });
 function loop(now) { if (!holdWorld) world.frame(now); requestAnimationFrame(loop); }
@@ -13531,12 +13600,311 @@ $('replayBtn').addEventListener('click', function () { Sfx.unlock(); Sfx.click()
   }
   place(); window.addEventListener('resize', place); setInterval(place, 400);
 })();
-showIntro();
+
+/* ===== social: challenge links, rare-find brag lines, streak range, friend rooms, streamer board ===== */
+const Social = (function () {
+  const SITE = 'https://dailysummit.io/';
+  const api = function () { return window.SUMMIT_API || ''; };
+  const MOCK = !!window.ARTIFACT_PREVIEW; // the Claude preview has no server: rooms and rarity run on made-up demo data
+  const MR = { code: 'DEMO42', name: 'Demo crew', today: [{ nick: 'Dana', score: 2100, rank: 'Diamond', grades: 'nnlas' }, { nick: 'Marcus', score: 1640, rank: 'Platinum', grades: 'snsrn' }, { nick: 'Priya', score: 1980, rank: 'Diamond', grades: 'anrsn' }, { nick: 'Sam', score: 820, rank: 'Silver', grades: 'srsrn' }], week: [{ nick: 'Dana', total: 7300, days: 4 }, { nick: 'Priya', total: 6900, days: 5 }, { nick: 'Marcus', total: 5100, days: 4 }, { nick: 'Sam', total: 2200, days: 3 }] };
+  function mockGet() { const t = MR.today.slice().sort(function (a, b) { return b.score - a.score; }); return Promise.resolve({ ok: true, code: MR.code, name: MR.name, day: dayNumber(), today: t, week: MR.week }); }
+  function mockPost(path, o) {
+    if (path === '/room/create') { MR.name = cleanName(o.name) || 'Demo crew'; return Promise.resolve({ ok: true, code: MR.code, name: MR.name }); }
+    if (path === '/room/score') { const n = cleanName(o.nick) || 'You'; MR.today = MR.today.filter(function (x) { return x.nick !== n; }); MR.today.push({ nick: n, score: o.score, rank: o.rank, grades: o.grades }); return Promise.resolve({ ok: true }); }
+    return Promise.resolve({ ok: false });
+  }
+  const sidv = function () { try { return localStorage.getItem('summit-sid') || ''; } catch (e) { return ''; } };
+  const G2L = { rock: 'r', legend: 'l', amaze: 'a', nice: 'n', safe: 's', none: 'x' }, L2G = {};
+  Object.keys(G2L).forEach(function (k) { L2G[G2L[k]] = k; });
+  const NAME_BAD = /[^\p{L}\p{N} .'\-]/gu;
+  const cleanName = function (v) { return String(v || '').replace(NAME_BAD, '').replace(/\s+/g, ' ').trim().slice(0, 16); };
+  const myName = function () { try { return cleanName(localStorage.getItem('summit-name')); } catch (e) { return ''; } };
+  const setName = function (v) { try { localStorage.setItem('summit-name', cleanName(v)); } catch (e) { /* ignore */ } };
+  const GRADE_DOT = { rock: '🟥', legend: '🟧', amaze: '🟪', nice: '🟦', safe: '🟩', none: '⬜' };
+  const gradeStr = function (gs) { return (gs || []).map(function (g) { return G2L[g] || 'x'; }).join(''); };
+  const dots = function (s) { return String(s || '').split('').map(function (c) { return GRADE_DOT[L2G[c]] || '⬜'; }).join(''); };
+  const fmtPct = function (p) { return p < 0.001 ? 'under 0.1%' : p < 0.01 ? (Math.round(p * 1000) / 10) + '%' : Math.round(p * 100) + '%'; };
+  const rankIdxByName = function (n) { return Math.max(0, RANKS.findIndex(function (r) { return r.name === n; })); };
+
+  /* ---- challenge links ---- */
+  function enc(o) { return [o.d, o.s, o.r, o.g || ''].join('~') + (o.n ? '~' + encodeURIComponent(o.n) : ''); }
+  function dec(s) {
+    try {
+      let o;
+      if (String(s).indexOf('~') >= 0) { const p = String(s).split('~'); o = { d: p[0], s: p[1], r: p[2], g: p[3] || '', n: p.slice(4).join('~') }; }
+      else o = JSON.parse(decodeURIComponent(escape(atob(String(s).replace(/-/g, '+').replace(/_/g, '/')))));
+      const d = parseInt(o.d, 10), sc = parseInt(o.s, 10), r = parseInt(o.r, 10);
+      if (!(d >= 0 && d < 99999 && sc >= 0 && sc <= 20000 && r >= 0 && r <= 7)) return null;
+      return { d: d, s: sc, r: r, n: cleanName(o.n), g: /^[rlansx]{0,12}$/.test(o.g || '') ? (o.g || '') : '' };
+    } catch (e) { return null; }
+  }
+  const linkFor = function (day, score, rk, grades) { return SITE + '?c=' + enc({ d: day, s: score, r: rk, n: myName(), g: grades }); };
+  function chal() { const c = jget('summit-chal'); return c && c.s >= 0 && Date.now() - (c.ts || 0) < 3 * 864e5 ? c : null; }
+  function cmpLine(c, score) {
+    const who = c.n || 'your friend', d = score - c.s;
+    return d > 0 ? { t: '⚔ You beat ' + who + ' by ' + fmt(d) + ' ft (' + fmt(score) + ' vs ' + fmt(c.s) + ')', k: 'win' }
+      : d < 0 ? { t: '⚔ ' + who + ' leads by ' + fmt(-d) + ' ft (' + fmt(c.s) + ' vs ' + fmt(score) + ')', k: 'lose' }
+      : { t: '⚔ Dead heat with ' + who + ' at ' + fmt(score) + ' ft', k: '' };
+  }
+
+  /* ---- rarity stats (real numbers from the stats server; absent until enough players) ---- */
+  const rcache = {};
+  function rarity(pid) {
+    if (MOCK) return Promise.resolve({ ok: true, n: 240, a: new Proxy({}, { get: function () { return 1; } }) });
+    if (!api()) return Promise.resolve(null);
+    if (!rcache[pid]) rcache[pid] = fetch(api() + '/rare?pid=' + encodeURIComponent(pid)).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+    return rcache[pid];
+  }
+  function shareOrCopy(text, btn, label) {
+    if (navigator.share && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) { navigator.share({ text: text }).catch(function () { copyText(text, btn, label); }); return; }
+    copyText(text, btn, label);
+  }
+
+  /* ---- result card ---- */
+  let card = null;
+  function rareInfo() {
+    let n = 0, u = 0, best = null;
+    S.rounds.forEach(function (rd) { rd.answers.forEach(function (a) { if (a.tier >= 50) { n++; if (a.tier === 100) u++; if (!best || a.tier > best.tier) best = { tier: a.tier, name: a.name, pid: rd.p.id }; } }); });
+    return { n: n, u: u, best: best };
+  }
+  function renderCard() {
+    if (!card) return;
+    let t = (RANK_EMOJI[card.rk] || '🏔') + ' ' + fmt(card.total) + ' ft on The Daily Summit' + (card.daily ? '' : ' (' + card.label + ')');
+    if (card.cmp) t += '\n' + card.cmp.t;
+    t += '\n' + (card.daily ? 'Beat me: ' + linkFor(card.day, card.total, card.rk, card.gs) : 'Play: ' + SITE);
+    card.text = t; $('shareText').value = t;
+    if (card.daily) { const d = jget('summit-daily'); if (d && d.day === card.day) { d.share = t; jset('summit-daily', d); } }
+  }
+  function finalShare(base, daily, total, grades, rk, mode) {
+    const c = daily ? chal() : null;
+    card = { base: base, label: mode.name || '', ri: rareInfo(), daily: daily, day: mode.day, total: total, rk: RANKS.indexOf(rk), gs: gradeStr(grades), cmp: c && !c.done ? cmpLine(c, total) : null, pct: '' };
+    renderCard();
+    const cb = $('chCmp'); if (card.cmp) { cb.textContent = card.cmp.t; cb.className = 'chcmp ' + card.cmp.k; cb.hidden = false; } else cb.hidden = true;
+    if (card.ri.best && (api() || MOCK)) {
+      const b = card.ri.best, mine = card;
+      rarity(b.pid).then(function (d) {
+        if (card !== mine || !d || d.n < 25 || d.a[b.name] == null) return;
+        mine.pct = fmtPct(d.a[b.name] / d.n); renderCard();
+      });
+    }
+    return card.text;
+  }
+  function afterFinal(daily, mode, total, grades, rk) {
+    if (S.preview && !MOCK) return;
+    if (daily) {
+      const h = jget('summit-hist') || {}; h[mode.day] = { s: total, r: RANKS.indexOf(rk) };
+      Object.keys(h).sort(function (a, b) { return a - b; }).slice(0, -90).forEach(function (k) { delete h[k]; });
+      jset('summit-hist', h);
+      const c = chal(); if (c && !c.done) { c.done = 1; jset('summit-chal', c); }
+      const rm = jget('summit-room'); if (rm && rm.code) submitRoom(rm, mode.day, total, rk.name, gradeStr(grades));
+    }
+  }
+
+  /* ---- brag line after a rare answer ---- */
+  function brag(parent, r) {
+    if (r.bust) return;
+    let best = null; r.answers.forEach(function (a) { if (a.tier >= 50 && (!best || a.tier > best.tier)) best = a; });
+    if (!best) return;
+    const uni = best.tier === 100, box = el('div', 'brag');
+    box.appendChild(el('div', 'bt', (uni ? '🟧 Unicorn find: ' : '🟪 Rare find: ') + best.name));
+    const sub = el('div', 'bs', uni ? 'One of the rarest answers on the board.' : 'Most players miss this one.'); box.appendChild(sub);
+    rarity(r.p.id).then(function (d) { if (d && d.n >= 25 && d.a[best.name] != null) { sub.textContent = 'Only ' + fmtPct(d.a[best.name] / d.n) + ' of players said this.' + (MOCK ? ' (demo number)' : ''); } });
+    parent.appendChild(box);
+  }
+
+  /* ---- streak range map ---- */
+  function streakInfo() { const s = jget('summit-streak') || {}; const cur = currentStreak(); return { cur: cur, n: cur.n, best: Math.max(s.best | 0, s.n | 0), frz: s.frz | 0, last: s.last }; }
+  const MILES = [[3, '⛺', 'Trailhead'], [7, '🏕', 'Ridgeline'], [14, '🧗', 'High col'], [30, '🏔', 'Summit month'], [60, '🗻', 'Cloud line'], [100, '🏆', 'Centurion']];
+  function openRange() {
+    let si = streakInfo(), hist = jget('summit-hist') || {}; const today = dayNumber(), body = $('rangeBody'); body.innerHTML = ''; let demo = false;
+    if (MOCK && !Object.keys(hist).length && !si.n) { demo = true; hist = {}; [0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 13].forEach(function (i) { hist[today - 13 + i] = { s: 900 + ((i * 397) % 1500), r: 2 + (i % 4) }; }); si = { cur: { today: true }, n: 6, best: 9, frz: 1, last: today }; }
+    const total = Object.keys(hist).length, climbed = {};
+    Object.keys(hist).forEach(function (k) { climbed[k] = hist[k]; });
+    const st = demo ? null : jget('summit-streak');
+    if (st && st.n > 0) for (let i = 0; i < st.n; i++) { const d = st.last - i; if (!(d in climbed)) climbed[d] = { s: 900, r: -1 }; }
+    const top = el('div', 'rng-top');
+    [[si.n, 'day streak'], [si.best, 'best streak'], [Math.max(total, Object.keys(climbed).length), 'days climbed']].forEach(function (x) { const d = el('div'); d.appendChild(el('b', '', String(x[0]))); d.appendChild(document.createTextNode(x[1])); top.appendChild(d); });
+    body.appendChild(top);
+    const N = 14, W = 336, H = 120, base = 98, step = (W - 24) / (N - 1);
+    const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('class', 'rng-map'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'Your last 14 days as a mountain range');
+    const mk = function (tag, a) { const e = document.createElementNS(NS, tag); Object.keys(a).forEach(function (k) { e.setAttribute(k, a[k]); }); svg.appendChild(e); return e; };
+    const pts = [];
+    for (let i = 0; i < N; i++) { const d = today - (N - 1 - i), c = climbed[d], x = 12 + i * step; const h = c ? 14 + Math.min(1, c.s / 2500) * 62 : 4; pts.push([x, base - h, d, c]); }
+    mk('path', { d: 'M12 ' + base + ' ' + pts.map(function (p) { return 'L' + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' ') + ' L' + (12 + (N - 1) * step) + ' ' + base + ' Z', style: 'fill:var(--paper2);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round' });
+    mk('line', { x1: 6, y1: base, x2: W - 6, y2: base, style: 'stroke:var(--ink);stroke-width:2' });
+    pts.forEach(function (p) {
+      if (p[3]) { mk('circle', { cx: p[0], cy: p[1], r: p[2] === today ? 6 : 4.5, style: 'fill:' + (RANK_COL[(RANKS[p[3].r] || {}).name] || 'var(--ochre)') + ';stroke:var(--ink);stroke-width:1.5' }); }
+      else if (p[2] < today) { const t = mk('text', { x: p[0], y: base + 13, 'text-anchor': 'middle', style: 'font:700 10px var(--sans);fill:var(--sepia)' }); t.textContent = '·'; }
+    });
+    const lbl = function (x, txt, anc) { const t = mk('text', { x: x, y: 114, 'text-anchor': anc, style: 'font:700 10px var(--sans);fill:var(--sepia)' }); t.textContent = txt; };
+    lbl(12, '14 days ago', 'start'); lbl(12 + (N - 1) * step, 'today', 'end');
+    body.appendChild(svg);
+    const ms = el('div', 'rng-ms');
+    MILES.forEach(function (m) { ms.appendChild(el('span', si.best >= m[0] ? '' : 'lock', m[1] + ' ' + m[2] + ' · ' + m[0] + ' days')); });
+    body.appendChild(ms);
+    const nx = MILES.filter(function (m) { return m[0] > si.n; })[0];
+    body.appendChild(el('p', 'rng-next', si.n === 0 ? 'Climb today to start a new streak.' : !si.cur.today ? '🔥 Climb today to keep your ' + si.n + '-day streak.' : nx ? (nx[0] - si.n) + ' more day' + (nx[0] - si.n > 1 ? 's' : '') + ' to reach ' + nx[1] + ' ' + nx[2] + '.' : 'You are above the cloud line. Keep going.'));
+    if (demo) body.appendChild(el('p', 'rm-tip', 'Preview with sample history. Yours fills in as you climb each day.'));
+    body.appendChild(el('p', 'rm-tip', '❄ Streak freezes: ' + si.frz + ' of 2. Hit every 7th day in a row to earn one; a freeze covers one missed day automatically.'));
+    $('rangeSheet').hidden = false;
+  }
+
+  /* ---- friend rooms ---- */
+  const R = { ok: false, tab: 'today', timer: 0 };
+  function post(path, o) { if (MOCK) return mockPost(path, o); return fetch(api() + path, { method: 'POST', headers: { 'content-type': 'text/plain' }, body: JSON.stringify(Object.assign({ sid: sidv() }, o)) }).then(function (r) { return r.json().catch(function () { return { ok: false }; }); }).catch(function () { return { ok: false, error: 'net' }; }); }
+  function getRoom(code, day) { if (MOCK) return mockGet(); return fetch(api() + '/room/' + code + '?day=' + day).then(function (r) { return r.json(); }).catch(function () { return { ok: false, error: 'net' }; }); }
+  function submitRoom(rm, day, score, rank, grades) {
+    if (!R.ok || (!api() && !MOCK) || S.preview && !MOCK) return Promise.resolve();
+    return post('/room/score', { code: rm.code, nick: rm.nick || myName() || 'Climber', day: day, score: score, rank: rank, grades: grades });
+  }
+  function ping() {
+    if (MOCK) { R.ok = true; return Promise.resolve(true); }
+    if (!api()) return Promise.resolve(false);
+    const ctl = typeof AbortController === 'function' ? new AbortController() : null; const to = setTimeout(function () { if (ctl) ctl.abort(); }, 4000);
+    return fetch(api() + '/room/ping', ctl ? { signal: ctl.signal } : {}).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { clearTimeout(to); R.ok = !!(j && j.ok); return R.ok; }).catch(function () { clearTimeout(to); R.ok = false; return false; });
+  }
+  const msg = function (t) { const m = $('rmMsg'); if (m) m.textContent = t || ''; };
+  const ERR = { no_room: 'No room with that code. Check the letters and try again.', too_many_rooms: 'That is a lot of rooms. Reuse one you already made.', room_full: 'That room is full (500 players).', net: 'Could not reach the server. Try again in a moment.' };
+  function openRoom(prefill) { stopPoll(); renderRoom(prefill); $('roomSheet').hidden = false; }
+  function closeRoom() { stopPoll(); $('roomSheet').hidden = true; }
+  function stopPoll() { clearInterval(R.timer); R.timer = 0; }
+  function renderRoom(prefill) {
+    const body = $('roomBody'), rm = jget('summit-room'); body.innerHTML = '';
+    if (!rm || !rm.code) {
+      const a = el('div', 'rm-sec'); a.appendChild(el('h4', '', 'Your name'));
+      const nm = el('input', 'sin'); nm.id = 'rmNick'; nm.maxLength = 16; nm.placeholder = 'Shown on the leaderboard'; nm.value = myName(); nm.autocomplete = 'off'; a.appendChild(nm); body.appendChild(a);
+      const c = el('div', 'rm-sec'); c.appendChild(el('h4', '', 'Start a room')); c.appendChild(el('p', 'rm-tip', 'Everyone in the room plays the same daily climb. Share the code with your group chat, office or stream.'));
+      const rn = el('input', 'sin'); rn.id = 'rmName'; rn.maxLength = 16; rn.placeholder = 'Room name (optional)'; rn.autocomplete = 'off'; c.appendChild(rn);
+      const cb = el('button', 'btn red', 'Create room'); cb.type = 'button'; c.appendChild(cb); body.appendChild(c);
+      const j = el('div', 'rm-sec'); j.appendChild(el('h4', '', 'Join with a code'));
+      const ci = el('input', 'sin code'); ci.id = 'rmCode'; ci.maxLength = 6; ci.placeholder = 'ABC123'; ci.autocomplete = 'off'; ci.autocapitalize = 'characters'; ci.value = prefill || ''; j.appendChild(ci);
+      const jb = el('button', 'btn ghost', 'Join room'); jb.type = 'button'; j.appendChild(jb); body.appendChild(j);
+      body.appendChild(el('p', 'rm-msg')).id = 'rmMsg';
+      [nm, rn, ci].forEach(function (i) { i.addEventListener('keydown', function (e) { e.stopPropagation(); if (e.key === 'Enter') (i === ci ? jb : cb).click(); }); });
+      const need = function () { const n = cleanName(nm.value); if (!n) { msg('Pick a name first.'); nm.focus(); return ''; } setName(n); return n; };
+      cb.addEventListener('click', function () {
+        const n = need(); if (!n) return; cb.disabled = true; msg('');
+        post('/room/create', { name: rn.value }).then(function (r) { cb.disabled = false; if (!r.ok) return msg(ERR[r.error] || 'Could not create the room.'); enterRoom(r.code, r.name, n); });
+      });
+      jb.addEventListener('click', function () {
+        const n = need(); if (!n) return; const code = ci.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+        if (code.length !== 6) return msg('Room codes are 6 letters or numbers.'); jb.disabled = true; msg('');
+        getRoom(code, dayNumber()).then(function (r) { jb.disabled = false; if (!r.ok) return msg(ERR[r.error] || 'Could not join.'); enterRoom(r.code, r.name, n); });
+      });
+      return;
+    }
+    const head = el('div', 'rm-sec'); head.appendChild(el('h4', '', rm.name || 'Summit friends')); head.appendChild(el('div', 'rm-code', rm.code));
+    const act = el('div', 'rm-act');
+    const inv = el('button', 'btn small ghost', 'Copy invite link'); inv.type = 'button'; inv.addEventListener('click', function () { copyText('Climb today\'s Daily Summit with me. Room code ' + rm.code + ': ' + SITE + '?room=' + rm.code, inv, 'Copy invite link'); });
+    const lv = el('button', 'btn small ghost', 'Leave room'); lv.type = 'button'; lv.addEventListener('click', function () { try { localStorage.removeItem('summit-room'); } catch (e) { /* ignore */ } stopPoll(); renderRoom(); });
+    act.appendChild(inv); act.appendChild(lv); head.appendChild(act); body.appendChild(head);
+    const tabs = el('div', 'rm-tabs');
+    [['today', 'Today'], ['week', 'This week']].forEach(function (t) { const b = el('button', 'btn small ghost' + (R.tab === t[0] ? ' on' : ''), t[1]); b.type = 'button'; b.addEventListener('click', function () { R.tab = t[0]; renderRoom(); }); tabs.appendChild(b); });
+    body.appendChild(tabs);
+    const list = el('div'); list.id = 'rmList'; list.appendChild(el('p', 'rm-tip', 'Loading…')); body.appendChild(list);
+    const tip = el('p', 'rm-tip', 'Streaming? Add this link as a Browser Source in OBS to show a live leaderboard, then ask chat to join with the code: ');
+    const bl = el('button', 'btn small ghost', 'Copy stream board link'); bl.type = 'button'; bl.style.marginTop = '6px'; bl.addEventListener('click', function () { copyText(SITE + '?board=' + rm.code, bl, 'Copy stream board link'); });
+    body.appendChild(tip); body.appendChild(bl);
+    if (MOCK) { body.appendChild(el('p', 'rm-tip', 'Preview demo: the friends here are made up so you can see the layout. On the live site they are real players.')); const pb = el('button', 'btn small ghost', 'Preview the stream board'); pb.type = 'button'; pb.addEventListener('click', function () { closeRoom(); boardPreview(); }); body.appendChild(pb); }
+    const sendMine = function () { const d = jget('summit-daily'), t = dayNumber(); if (d && d.day === t && typeof d.score === 'number') return submitRoom(rm, t, d.score, d.rank, gradeStr(d.grades)); return Promise.resolve(); };
+    const load = function () {
+      getRoom(rm.code, dayNumber()).then(function (r) {
+        const box = $('rmList'); if (!box) return; box.innerHTML = '';
+        if (!r.ok) { box.appendChild(el('p', 'rm-tip', ERR[r.error] || 'Could not load the board.')); return; }
+        const rows = R.tab === 'week' ? r.week : r.today;
+        if (!rows.length) { box.appendChild(el('p', 'rm-tip', R.tab === 'week' ? 'No climbs yet this week.' : 'No one has finished today\'s climb yet. Be the first.')); return; }
+        rows.forEach(function (x, i) {
+          const row = el('div', 'rm-row' + (x.nick === (rm.nick || myName()) ? ' me' : '')); row.appendChild(el('span', '', i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : String(i + 1)));
+          const mid = el('div'); mid.appendChild(document.createTextNode(x.nick)); mid.appendChild(el('small', '', R.tab === 'week' ? x.days + ' day' + (x.days > 1 ? 's' : '') + ' climbed' : (x.rank || '') + ' ' + dots(x.grades)));
+          row.appendChild(mid); row.appendChild(el('span', 'ft', fmt(R.tab === 'week' ? x.total : x.score) + ' ft')); box.appendChild(row);
+        });
+      });
+    };
+    sendMine().then(load); R.timer = setInterval(load, 30000);
+  }
+  function enterRoom(code, name, nick) {
+    jset('summit-room', { code: code, name: name, nick: nick }); R.tab = 'today';
+    const room = jget('summit-room'), d = jget('summit-daily'), t = dayNumber();
+    (d && d.day === t && typeof d.score === 'number' ? submitRoom(room, t, d.score, d.rank, gradeStr(d.grades)) : Promise.resolve()).then(function () { renderRoom(); });
+  }
+
+  /* ---- streamer board (?board=CODE) ---- */
+  function board(code) {
+    document.body.classList.add('board'); document.documentElement.classList.remove('pre-open');
+    const v = $('boardView'); const draw = function (r) { drawBoard(v, r); };
+    const go = function () { getRoom(code, dayNumber()).then(draw); }; go(); setInterval(go, 15000);
+  }
+  function drawBoard(v, r) {
+    {
+      v.innerHTML = '';
+      if (!r || !r.ok) { v.appendChild(el('h1', '', 'The Daily Summit')); v.appendChild(el('div', 'bsub', 'Room not found. Check the code in the link.')); return; }
+      v.appendChild(el('h1', '', r.name + ' · today\'s climb')); v.appendChild(el('div', 'bsub', 'Play at dailysummit.io · room code ' + r.code));
+      if (!r.today.length) v.appendChild(el('div', 'bsub', 'Waiting for the first finisher…'));
+      r.today.slice(0, 10).forEach(function (x, i) {
+        const row = el('div', 'brow'); row.appendChild(el('span', '', i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : String(i + 1)));
+        const mid = el('div'); mid.appendChild(document.createTextNode(x.nick)); mid.appendChild(el('small', '', (x.rank || '') + ' ' + dots(x.grades))); row.appendChild(mid);
+        row.appendChild(el('span', '', fmt(x.score) + ' ft')); v.appendChild(row);
+      });
+    }
+  }
+  function boardPreview() {
+    const v = $('boardView'); document.body.classList.add('board');
+    document.body.style.background = 'linear-gradient(160deg,#2c3a55,#7a3b3b)'; document.body.style.setProperty('background', 'linear-gradient(160deg,#2c3a55,#7a3b3b)', 'important');
+    mockGet().then(function (r) {
+      drawBoard(v, r); const x = el('button', 'btn small ghost', 'Close preview'); x.type = 'button'; x.style.cssText = 'position:fixed;bottom:14px;right:14px;width:auto;text-shadow:none';
+      x.addEventListener('click', function () { document.body.classList.remove('board'); document.body.style.removeProperty('background'); v.innerHTML = ''; }); v.appendChild(x);
+      v.appendChild(el('div', 'bsub', 'Demo data. On the live site this is a transparent overlay for OBS.'));
+    });
+  }
+
+  /* ---- intro hooks, name box, boot ---- */
+  function intro() {
+    $('demoChal').hidden = !MOCK;
+    const c = chal(), b = $('chBanner'), done = loadDaily();
+    if (c && !(done && c.done)) {
+      const who = c.n || 'A friend';
+      b.textContent = ''; const strong = el('b', '', who); b.appendChild(strong); b.appendChild(document.createTextNode(' climbed ' + fmt(c.s) + ' ft (' + (RANKS[c.r] ? RANKS[c.r].name : '') + ')' + (c.g ? ' ' + dots(c.g) : '') + '. Can you beat it?'));
+      const sm = el('small', '', c.d === dayNumber() ? 'Same seven questions as today\'s daily.' : 'From Daily #' + (c.d + 1) + '. Today\'s questions are different, the target still counts.'); b.appendChild(sm);
+      if (done && !c.done) { const cl = cmpLine(c, done.score); sm.textContent = cl.t; c.done = 1; jset('summit-chal', c); }
+      b.hidden = false;
+    } else b.hidden = true;
+    const si = streakInfo(), sb = $('streak');
+    if (si.n > 0) { sb.textContent = '🔥 ' + si.n + '-day streak' + (si.cur.today ? '' : si.cur.frz ? ' · ❄ a freeze will cover yesterday' : ' · climb today to keep it') + (si.frz ? ' · ❄×' + si.frz : ''); sb.hidden = false; }
+    $('roomBtn').hidden = !R.ok;
+  }
+  function boot() {
+    const q = new URLSearchParams(location.search);
+    if (q.get('board')) { board(String(q.get('board')).toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6)); return true; }
+    const cv = q.get('c'); if (cv) { const c = dec(cv); if (c) { c.ts = Date.now(); jset('summit-chal', c); } }
+    const rv = q.get('room'); const rc = rv ? String(rv).toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6) : '';
+    if (cv || rv) { try { history.replaceState(null, '', location.pathname); } catch (e) { /* ignore */ } }
+    ping().then(function (ok) { $('roomBtn').hidden = !ok; if (ok && rc.length === 6 && !(jget('summit-room') || {}).code) openRoom(rc); });
+    return false;
+  }
+  $('demoChal').addEventListener('click', function () { jset('summit-chal', { d: dayNumber(), s: 2100, r: 4, n: 'Dana', g: 'nnlas', ts: Date.now() }); intro(); window.scrollTo(0, 0); });
+  $('rangeBtn').addEventListener('click', function () { Sfx.unlock(); openRange(); });
+  $('streak').addEventListener('click', function () { openRange(); }); $('streak').style.cursor = 'pointer';
+  $('rangeClose').addEventListener('click', function () { $('rangeSheet').hidden = true; });
+  $('rangeSheet').addEventListener('click', function (e) { if (e.target === this) this.hidden = true; });
+  $('roomBtn').addEventListener('click', function () { Sfx.unlock(); openRoom(); });
+  $('roomClose').addEventListener('click', closeRoom);
+  $('roomSheet').addEventListener('click', function (e) { if (e.target === this) closeRoom(); });
+  document.addEventListener('keydown', function (e) { if (e.key !== 'Escape') return; if (!$('rangeSheet').hidden) { e.preventDefault(); $('rangeSheet').hidden = true; } if (!$('roomSheet').hidden) { e.preventDefault(); closeRoom(); } });
+  $('myName').value = myName(); $('nameBox').hidden = !myName(); if (myName()) $('nameToggle').hidden = true;
+  $('nameToggle').addEventListener('click', function () { $('nameBox').hidden = false; $('nameToggle').hidden = true; $('myName').focus(); });
+  $('myName').addEventListener('keydown', function (e) { e.stopPropagation(); });
+  $('myName').addEventListener('input', function () { setName(this.value); renderCard(); });
+  return { share: shareOrCopy, finalShare: finalShare, afterFinal: afterFinal, brag: brag, intro: intro, boot: boot, openRange: openRange, _dec: dec, _enc: enc, _R: R, ping: ping, openRoom: openRoom };
+})();
+window.__social = Social;
+
+if (!Social.boot()) showIntro();
 if (shouldOpen()) playOpening();
 if ($('curtain').hidden) document.documentElement.classList.remove('pre-open');
 setTimeout(function () { document.documentElement.classList.remove('pre-open'); }, 4000);
 requestAnimationFrame(loop);
-window.__summit = { ensureData: ensureData, dailyFor: dailyFor, get S() { return S; }, world: world, SETS: SETS, openRare: openRare, startGame: startGame, openPick: openPick, get PROMPTS() { return PROMPTS; } };
+window.__summit = { showFinal: showFinal, showIntro: showIntro, ensureData: ensureData, dailyFor: dailyFor, get S() { return S; }, world: world, SETS: SETS, openRare: openRare, startGame: startGame, openPick: openPick, get PROMPTS() { return PROMPTS; } };
 
 /* ---------------- secret: the Storm Wraith (daily boss) ---------------- */
 // Three phases, three prompts. Each phase it evolves. Tune the numbers here.

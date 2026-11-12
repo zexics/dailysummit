@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>About, Credits and Privacy | The Daily Summit</title>
+<meta name="description" content="How The Daily Summit works, where its question data comes from, and what it does and does not collect about players.">
+<link rel="canonical" href="https://dailysummit.io/about.html">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#efe3c8">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Daily Summit">
+<meta property="og:title" content="About The Daily Summit">
+<meta property="og:description" content="How the game works, data credits and privacy.">
+<meta property="og:url" content="https://dailysummit.io/about.html">
+<meta property="og:image" content="https://dailysummit.io/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root { --bg: #efe3c8; --card: #f6ecd6; --ink: #2b2218; --sepia: #6d5a43; --red: #b8372b; --line: rgba(43, 34, 24, .25); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #1c1812; --card: #272018; --ink: #f1e8d4; --sepia: #b3a487; --red: #ef7a62; --line: rgba(241, 232, 212, .22); color-scheme: dark; } }
+  :root[data-theme="dark"] { --bg: #1c1812; --card: #272018; --ink: #f1e8d4; --sepia: #b3a487; --red: #ef7a62; --line: rgba(241, 232, 212, .22); color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 Georgia, 'Times New Roman', serif; padding-block: 28px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  main { max-width: 680px; margin: 0 auto; }
+  .back { display: inline-block; margin-bottom: 18px; font: 800 13px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--red); text-decoration: none; }
+  h1 { margin: 0 0 6px; font: 700 clamp(30px, 7vw, 44px)/1.1 Georgia, serif; text-wrap: balance; }
+  .lede { margin: 0 0 26px; color: var(--sepia); font-size: 18px; }
+  section { background: var(--card); border: 1.5px solid var(--ink); border-radius: 4px 8px 5px 7px / 7px 4px 8px 5px; padding: 16px 18px; margin: 0 0 16px; box-shadow: 0 2px 0 var(--line); }
+  h2 { margin: 0 0 8px; font: 800 12.5px system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--sepia); }
+  p { margin: 0 0 10px; } p:last-child { margin-bottom: 0; }
+  ul { margin: 0; padding-left: 20px; } li { margin: 0 0 6px; }
+  a { color: var(--red); } code { font: 13px ui-monospace, Menlo, Consolas, monospace; background: var(--bg); padding: 1px 5px; border-radius: 3px; }
+  .small { font-size: 14px; color: var(--sepia); }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="/">‹ Back to the game</a>
+  <h1>About The Daily Summit</h1>
+  <p class="lede">A free daily trivia game about the answers other people give.</p>
+
+  <section>
+    <h2>How it works</h2>
+    <p>Every day has seven questions, such as "Name something you'd bring on a road trip." Name an answer to climb. Rare answers climb higher (10, 25, 50 or 100 feet each), but name one of the most common answers and you lose that round's climb. Bank your height at any camp, and see how high you get on the ranks ladder.</p>
+    <p>Everyone gets the same seven questions on a given day. Play unlimited routes for practice, share a result with a friend, or start a room to compare scores with your group.</p>
+  </section>
+
+  <section>
+    <h2>About the answer rankings</h2>
+    <p>How common an answer is has been estimated by an AI-assisted process, not measured in a real survey. The rankings are meant to be fun and fair, but they are not perfect. If a reasonable answer is rejected, it simply isn't on the board yet and it costs you nothing.</p>
+  </section>
+
+  <section>
+    <h2>Data sources and credits</h2>
+    <ul>
+      <li><b>Anime titles.</b> Contains information from <a href="https://github.com/manami-project/anime-offline-database" rel="noopener">anime-offline-database</a> by manami-project, which is made available under the <a href="https://opendatacommons.org/licenses/odbl/1-0/" rel="noopener">Open Database License (ODbL) 1.0</a>. Its entries are collected from public anime catalogs such as MyAnimeList, AniList and Kitsu, and the individual contents are under the <a href="https://opendatacommons.org/licenses/dbcl/1-0/" rel="noopener">Database Contents License</a>. The anime title list used by this game is a derivative of that database and is shared under the same ODbL terms in this site's public repository (<code>q/N501.json</code> and <code>q/N502.json</code>).</li>
+      <li><b>Anime character names.</b> Character names are drawn from community-maintained character tags on Danbooru, used as a list of names only.</li>
+      <li><b>Everything else.</b> The other questions and answer lists (games, movies, TV, sports, food, places and more) were compiled for this game from general knowledge and public lists of facts.</li>
+    </ul>
+    <p class="small">Names, titles and brands used in questions and answers belong to their owners. The Daily Summit is not affiliated with or endorsed by any brand, show, game, team or company named in it.</p>
+  </section>
+
+  <section>
+    <h2>Privacy</h2>
+    <ul>
+      <li><b>No accounts and no ads.</b> You never sign up or log in.</li>
+      <li><b>Anonymous play stats.</b> The game sends a random ID stored in your browser along with what you played and scored, so the answer rankings can improve. We do not store your IP address, name or email. The only location kept is a two-letter country code.</li>
+      <li><b>On your device.</b> Your best score, daily result, streak and settings are saved in your browser's local storage and stay there.</li>
+      <li><b>Friend rooms.</b> If you create or join a room, the nickname you type and your daily scores are stored so the room's leaderboard can show them to people who have the room's code. Do not use your real name if you would rather not. Leaving a room just stops sending new scores.</li>
+      <li><b>Challenge links.</b> A link only contains a score, rank, result colors and an optional name. It never contains the questions or your answers.</li>
+    </ul>
+  </section>
+
+  <p class="small">The Daily Summit is an independent project. Thanks for playing.</p>
+</main>
+</body>
+</html>
